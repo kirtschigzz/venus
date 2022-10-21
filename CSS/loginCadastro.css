@@ -1,0 +1,202 @@
+* {
+	margin: 0;
+	padding: 0;
+  box-sizing: border-box;
+  text-decoration: none; 
+}
+
+body{
+  background-color: black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  align-items: center;
+}
+
+/*LINKS */
+
+a{
+	text-decoration: none;
+  
+}
+
+a:link, a:visited{
+	color:#ffffff;
+  
+}
+
+a:hover{
+	color:#782aac;
+	background: black;
+  background-position: right bottom;
+ 
+}
+
+/*HEADER*/
+
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+}
+
+.logo-menu{
+height: 50px;
+margin: 6px;
+}
+
+nav{ 
+margin-bottom: 0.4px solid #782aac;  
+display: flex;
+gap: 35px;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.menu-item{
+color: black;
+font-size: 18px;
+}
+
+/*MAIN*/
+
+main{
+  border-top: 0.4px solid #782aac;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 50px;
+  align-items: center;
+}
+
+#titulo{
+  color: #782aac;
+  margin-top: 100px;
+  font-size: 60px;
+}
+
+#principal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-top: 10px;
+}
+
+fieldset{
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo{
+  color:white;
+  display: flex;
+  margin: 10px;
+  gap: 10px;
+  flex-direction: column;
+}
+
+input{
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 45px;
+  font-size: 15px;
+  border: 00.4px solid #5a348e;
+  border-radius: 20px;
+  margin: 15px;
+  padding-left: 8px;
+}
+
+
+.enfase{
+  color: #eb6d59;
+}
+
+
+#tituloLabel{
+  display: flex;
+  color: #782aac;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.campo1{
+  display: flex;
+  flex-direction: row;
+  border: none;
+  color: #ffffff;
+  background-color: black;
+  width: 250px;
+}
+
+select{
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 45px;
+  font-size: 15px;
+  border: 00.4px solid #5a348e;
+  border-radius: 20px;
+  margin: 15px;
+}
+
+
+#textcampoReclamacao{
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 45px;
+  font-size: 15px;
+  border: 00.4px solid #5a348e;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+/*BUTTON*/
+
+.enviar{
+  margin-top: 20px;
+  background: hsla(8, 78%, 64%, 1);
+  background: linear-gradient(360deg, hsla(8, 78%, 64%, 1) 0%, hsla(336, 87%, 61%, 1) 23%, hsla(276, 61%, 42%, 1) 59%, hsla(273, 7%, 25%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EB6D59", endColorstr="#F24389", GradientType=1 );
+  width: 150px;
+  height: 45px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: all 0.5s;
+  color: #ffffff;
+} 
+
+form input:focus{
+  outline: 0.4px solid;
+}
+
+/*FOOTER*/
+
+footer{
+    text-align: center;
+  }
+  
+  .logo2{
+    width: 150px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }

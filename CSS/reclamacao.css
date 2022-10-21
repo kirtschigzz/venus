@@ -1,0 +1,185 @@
+* {
+	margin: 0;
+	padding: 0;
+  box-sizing: border-box;
+  text-decoration: none; 
+}
+
+body{
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/*LINKS */
+
+a{
+	text-decoration: none;
+  
+}
+
+a:link, a:visited{
+	color:#ffffff;
+  
+}
+
+a:hover{
+	color:#782aac;
+	background: black;
+  background-position: right bottom;
+ 
+}
+
+/*HEADER*/
+
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+}
+
+.logo-menu{
+height: 50px;
+margin: 6px;
+}
+
+nav{ 
+margin-bottom: 0.4px solid #782aac;  
+display: flex;
+gap: 35px;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.menu-item{
+color: black;
+font-size: 18px;
+}
+
+/*MAIN*/
+
+.enfase{
+  color: #eb6d59;
+}
+
+#pagCReclamacao{
+  border-top: 0.4px solid #782aac;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#tituloFormReclamacao{
+  font-weight: 400;
+  color: #782aac;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 600px;
+  margin: 0 auto;
+}
+
+
+#tituloLabel{
+  display: flex;
+  color: #782aac;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.campo{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: none;
+  background-color: black;
+  width: 100%;
+}
+
+.campo1{
+  display: flex;
+  flex-direction: row;
+  border: none;
+  background-color: black;
+  width: 250px;
+}
+
+#campoReclamacao{
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 45px;
+  font-size: 15px;
+  border: 00.4px solid #5a348e;
+  border-radius: 20px;
+  margin: 15px;
+  padding-left: 8px;
+}
+
+
+.fieldsets{
+  border: none;
+}
+
+#textcampoReclamacao{
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 45px;
+  font-size: 15px;
+  border: 00.4px solid #5a348e;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+
+/*button*/
+
+#postar{
+  margin-top: 10px;
+  background: hsla(8, 78%, 64%, 1);
+  background: linear-gradient(360deg, hsla(8, 78%, 64%, 1) 0%, hsla(336, 87%, 61%, 1) 23%, hsla(276, 61%, 42%, 1) 59%, hsla(273, 7%, 25%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EB6D59", endColorstr="#F24389", GradientType=1 );
+  width: 220px;
+  height: 45px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: all 0.5s;
+  color: #ffffff;
+} 
+
+form input:focus{
+  outline: 0.4px solid;
+}
+
+
+
+/*FOOTER*/
+
+#rodape{
+    text-align: center;
+  }
+  
+  .logo2{
+    width: 150px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
