@@ -165,7 +165,7 @@ select{
 
 /*BUTTON*/
 
-.enviar{
+#enviar{
   margin-top: 20px;
   background: hsla(8, 78%, 64%, 1);
   background: linear-gradient(360deg, hsla(8, 78%, 64%, 1) 0%, hsla(336, 87%, 61%, 1) 23%, hsla(276, 61%, 42%, 1) 59%, hsla(273, 7%, 25%, 1) 100%);

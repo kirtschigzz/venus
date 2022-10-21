@@ -30,7 +30,7 @@ window.onload = function () {
 document.addEventListener("keypress", function(e) {
   if(e.key === 'Enter') {
   
-      var btn = document.querySelector("#pesquisar", "#logar", "#postar");
+      var btn = document.querySelector("#pesquisar", "#logar", "#postar", "#enviar");
     
     btn.click();
   

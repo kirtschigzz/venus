@@ -101,7 +101,7 @@
             </div>
 
             <div class="campo">
-                <button class="enviar" type="submit" value="submit"> Cadastrar </button>
+                <button id="enviar" type="submit" value="submit"> Cadastrar </button>
             </div>
 
         </fieldset>

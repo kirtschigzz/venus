@@ -1,5 +1,7 @@
 <?php
 	if (count($_POST)){ 
+
+		include ('conexao.php');
 		
 		$nomeProduto = $_POST['nomeProduto'];
 		$codigo = $_POST['codigo'];
@@ -11,6 +13,11 @@
 		header('Location: http://localhost/venus/venustcc/venus.php');
 		die();
 	}
+
+	$sql_code = "INSERT INTO cadastro_opiniao (nomeProduto, codigoBarras, empresaFabricante, categoria, propaganda, opiniaoCliente, dataPost) 
+	VALUES ('$nomeProduto', '$codigoBarras', '$empresaFabricante', '$categoria', '$propaganda', '$opinaoCliente', NOW())";
+
+	
 ?>
 
 
