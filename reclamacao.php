@@ -1,23 +1,36 @@
 <?php
+
 	if (count($_POST)){ 
 
 		include ('conexao.php');
-		
+
+		$erro = false;
+	
 		$nomeProduto = $_POST['nomeProduto'];
 		$codigo = $_POST['codigo'];
 		$empresaFabricante = $_POST['empresaFabricante'];
 		$categoria = $_POST['categoria'];
 		$propaganda = $_POST['propaganda'];
 		$opiniaoCliente = $_POST['opiniaoCliente'];
-		
-		header('Location: http://localhost/venus/venustcc/venus.php');
-		die();
 	}
 
-	$sql_code = "INSERT INTO cadastro_opiniao (nomeProduto, codigoBarras, empresaFabricante, categoria, propaganda, opiniaoCliente, dataPost) 
-	VALUES ('$nomeProduto', '$codigoBarras', '$empresaFabricante', '$categoria', '$propaganda', '$opinaoCliente', NOW())";
+	if (empty($codigo)){
 
-	
+		$erro = "Digite o código de barras";
+
+	}else{
+
+		$sql_code = "INSERT INTO cadastro_opiniao (nomeProduto, codigoBarras, empresaFabricante, categoria, propaganda, opiniaoCliente, dataPost) 
+		VALUES ('$nomeProduto', '$codigo', '$empresaFabricante', '$categoria', '$propaganda', '$opinaoCliente', NOW())";
+		
+		$deuCerto = $mysqli->query($sql_code) or die($mysqli->error);
+
+		if ($deuCerto){
+			header('Location: http://localhost/venustcc/venus.php');
+			unset($_POST);
+			die();
+		}
+	}	
 ?>
 
 
