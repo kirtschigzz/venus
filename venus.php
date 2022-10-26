@@ -35,7 +35,7 @@
             
             <section class="barraPesquisa">
                 <input type="text" id="pesquise" placeholder="Produto / Empresa">
-                <button id="pesquisar"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
             </section>
             
             <section class="cadastre">
