@@ -1,3 +1,23 @@
+<?php
+
+	include('conexao.php');
+	
+	if(!isset($_SESSION)){
+		@session_start();
+	}
+
+	if(isset($_POST["comecar"])){
+
+		if(!isset($_SESSION['usuario'])){
+			header("Location: login.php");
+		
+		}else{
+			header("Location: venus.php");
+
+		}
+   	}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -41,8 +61,8 @@
 				Te ajudamos a combater a <br> propaganda enganosa
 			</h2>
 
-			<form action="login.php">
-				<button class="botao-comecar" type="submit"> Comece aqui </button>
+			<form method="post" action="">
+				<button class="botao-comecar" type="submit" name="comecar"> Comece aqui </button>
 			</form>
 
 			

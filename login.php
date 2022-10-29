@@ -1,3 +1,39 @@
+<?php
+
+if (isset($_POST ['email']) && ($_POST ['senha'])){
+
+	include('conexao.php');
+
+	$email = $mysqli->escape_string ($_POST ['email']);
+	$senha = $_POST ['senha'];
+
+	$sql_code = "SELECT * FROM usuario WHERE email = '$email'";
+	$sql_query = $mysqli->query($sql_code) or die ($mysqli->error);
+
+	$erro = false;
+
+	if($sql_query->num_rows == 0){
+		echo "O email informado é incorreto";
+	}else{
+		$usuario = $sql_query->fetch_assoc();
+
+		if (!password_verify($senha, $usuario['senha'])){
+			echo "senha incorreta";
+		}else{
+			if(!isset($_SESSION)){
+				@session_start();
+
+				$_SESSION['usuario'] = $usuario['id'];
+
+				header("Location: venus.php");
+			}
+		}
+
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +70,7 @@
 		</section>
 
 		<section id="formLogin">
-				<form method="post" action="link banco de dados">
+				<form method="post" action="">
 
 				<fieldset>
 
@@ -59,7 +95,7 @@
 
 			<div class="tiposLogin">
 					<a class="tipos" href="loginUser.php"> <button class="ir" type="submit"> Cadastre-se </button> </a>
-					<a class="tipos" href="loginEmpresa.php"> <button class="ir" type="submit"> É uma Empresa? </button> </a>
+					
 			</div>
 
 	</main>

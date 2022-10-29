@@ -1,36 +1,16 @@
 <?php
 
-	if (count($_POST)){ 
-
-		include ('conexao.php');
-
-		$erro = false;
+	include('conexao.php');
 	
-		$nomeProduto = $_POST['nomeProduto'];
-		$codigo = $_POST['codigo'];
-		$empresaFabricante = $_POST['empresaFabricante'];
-		$categoria = $_POST['categoria'];
-		$propaganda = $_POST['propaganda'];
-		$opiniaoCliente = $_POST['opiniaoCliente'];
+	if(!isset($_SESSION)){
+		@session_start();
 	}
 
-	if (empty($codigo)){
 
-		$erro = "Digite o código de barras";
-
-	}else{
-
-		$sql_code = "INSERT INTO cadastro_opiniao (nomeProduto, codigoBarras, empresaFabricante, categoria, propaganda, opiniaoCliente, dataPost) 
-		VALUES ('$nomeProduto', '$codigo', '$empresaFabricante', '$categoria', '$propaganda', '$opinaoCliente', NOW())";
-		
-		$deuCerto = $mysqli->query($sql_code) or die($mysqli->error);
-
-		if ($deuCerto){
-			header('Location: http://localhost/venustcc/venus.php');
-			unset($_POST);
-			die();
-		}
-	}	
+	if(!isset($_SESSION['usuario'])){
+		header("Location: login.php");	
+        die();
+	}
 ?>
 
 
@@ -44,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="css/reclamacao.css">
 	<script type="text/javascript" src="js/main.js"></script>
 
-    <title>Cadastro de Reclamação</title>
+    <title>Cadastro de Opinião</title>
 	
 </head>
 
@@ -66,11 +46,11 @@
 	<main id="pagCReclamacao"> 
 
 	<div id="tituloFormReclamacao">
-		<h1> Preencha os dados para postar sua <br> <strong class="enfase">reclamação </strong></h1>
+		<h1> Preencha os dados para postar sua <br> <strong class="enfase"> opinião </strong></h1>
 	</div>
 
     
-	<form method="post" action="">
+	<form method="post" action="processa.php">
 		
 			<fieldset class="fieldsets">
 
@@ -79,17 +59,14 @@
 				<div class="campo">
 
 					<label for="nomeProduto"> Nome do Produto </label>
-					<input type="text" name="nomeProduto" id="campoReclamacao" required placeholder="Conforme a embalagem" value="<?php if (isset($_POST['nomeProduto'])) echo $_POST['nomeProduto']; ?>"> 
-				
-					<label for="codigo"> Código de Barras </label>
-					<input type="text" name="codigo" id="campoReclamacao" value="<?php if (isset($_POST['codigo'])) echo $_POST['codigo']; ?>"> 
+					<input type="text" name="nomeProduto" id="campoReclamacao" required placeholder="Conforme a embalagem">  
 			
-					<label for="empresaFabricante"> Empresa / Fabricante </label>
-					<input type="text" name="empresaFabricante" id="campoReclamacao" required value="<?php if (isset($_POST['empresaFabricante'])) echo $_POST['empresaFabricante']; ?>"> 
+					<label for="nomeFantasia"> Empresa / Fabricante </label>
+					<input type="text" name="nomeFantasia" id="campoReclamacao"> 
 			
-					<label for="categoria"> Categoria do Produto </label>
+					<label for="nomeCategoria"> Categoria do Produto </label>
 
-					<select id="campoReclamacao" name="categoria" required value="<?php if (isset($_POST['categoria'])) echo $_POST['categoria']; ?>">
+					<select id="campoReclamacao" name="nomeCategoria" required>
 						<option selected disabled value=""> Selecione </option>
 						<option>Skincare</option>
 						<option>Para o cabelo</option>
@@ -97,16 +74,16 @@
 						<option>Maquiagens</option>
 					</select>
 				
-					<label for="propaganda"> O que a propaganda prometia? </label>
-					<textarea name="propaganda" id="textcampoReclamacao" rows="6" value="<?php if (isset($_POST['propaganda'])) echo $_POST['propaganda']; ?>"></textarea>
+					<label for="textoPropaganda"> O que a propaganda prometia? </label>
+					<textarea name="textoPropaganda" id="textcampoReclamacao" rows="6"></textarea>
 			
-					<label for="opiniaoCliente"> Qual a sua opinião? </label>
-					<textarea name="opiniaoCliente" id="textcampoReclamacao" rows="6" value="<?php if (isset($_POST['opiniaoCliente'])) echo $_POST['opiniaoCliente']; ?>"></textarea>
+					<label for="textoOpiniao"> Qual a sua opinião? </label>
+					<textarea name="textoOpiniao" id="textcampoReclamacao" rows="6"></textarea>
 
 				</div>
 				
 				<div class="botaoPostar">
-					<button id="postar" type="submit"> Postar Reclamação </button>
+					<button id="postar" type="submit" name="cadastrarOpiniao"> Postar Reclamação </button>
 				</div>
 
 			</fieldset>

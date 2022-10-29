@@ -1,3 +1,35 @@
+<?php
+
+    if (isset($_POST['email'])){
+
+        include ('conexao.php');
+
+        $email = $_POST ['email'];
+        $senha = password_hash($_POST ['senha'], PASSWORD_DEFAULT);
+        $nome = $_POST ['nome'];
+        $sobrenome = $_POST ['sobrenome'];
+        $genero = $_POST ['genero'];
+        $pele = $_POST ['pele'];
+        $cabelo = $_POST ['cabelo'];
+
+        $deuCerto = $mysqli->query("INSERT INTO usuario
+                            (email, senha, nome, sobrenome, pele, cabelo, genero) VALUES
+                            ('$email', '$senha','$nome','$sobrenome', '$pele', '$cabelo', '$genero')");
+        
+        if ($deuCerto){
+
+			header('Location: http://localhost/venustcc/login.php');
+			unset($_POST);
+			die();
+		}
+
+    }
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,18 +60,13 @@
 
     <div id="principal">
 
-    <form method="post" action="link banco de dados">
+    <form method="post" action="">
 
         <fieldset>
 
             <div class="campo">
                 <label for="email"> Email </label>
                 <input type="email" name="email" required>
-            </div>
-
-            <div class="campo">
-                <label for="user"> Nome de Usuário </label>
-                <input type="text" name="user" required>
             </div>
         
             <div class="campo">

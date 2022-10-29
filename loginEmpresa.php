@@ -1,3 +1,23 @@
+<?php
+
+    if (isset($_POST['email'])){
+
+        include ('conexao.php');
+
+        $email = $_POST ['email'];
+        $senha = password_hash($_POST ['senha'], PASSWORD_DEFAULT);
+        $razaoSocial = $_POST ['razaoSocial'];
+        $nomeFantasia = $_POST ['nomeFantasia'];
+        $cnpj = $_POST ['cnpj'];
+
+        $mysqli->query("INSERT INTO empresa
+                            (cnpj, razaoSocial, nomeFantasia, email, senha) VALUES
+                            ('$cnpj', '$razaoSocial','$nomeFantasia','$email', '$senha')");
+
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +50,20 @@
 
     <div id="principal">
 
-    <form method="post" action="link banco de dados">
+    <form method="post" action="">
 
         <fieldset>
+
+            <div class="campo">
+                <label for="email"> Email </label>
+                <input type="email" name="email" required>
+            </div>
+
+        
+            <div class="campo">
+                <label for="senha">Senha </label>
+                <input type="password" name="senha" required>
+            </div>
 
             <div class="campo">
                 <label for="razaoSocial"> Razão Social </label>
@@ -46,19 +77,7 @@
 
             <div class="campo">
                 <label for="cnpj"> CNPJ </label>
-                <input type="text" name="cnpj" placeholder="xxx.xxx.xxx-xx"  required>
-            </div>
-
-
-            <div class="campo">
-                <label for="email"> Email </label>
-                <input type="email" name="email" required>
-            </div>
-
-        
-            <div class="campo">
-                <label for="senha">Senha </label>
-                <input type="password" name="senha" required>
+                <input type="number" name="cnpj" placeholder="somente números"  required>
             </div>
 
             <div class="campo">

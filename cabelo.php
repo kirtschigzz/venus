@@ -1,3 +1,18 @@
+<?php
+
+	include('conexao.php');
+	
+	if(!isset($_SESSION)){
+		@session_start();
+	}
+
+
+	if(!isset($_SESSION['usuario'])){
+		header("Location: login.php");	
+        die();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
