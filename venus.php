@@ -36,7 +36,17 @@
         <nav>
             <a class="menu-item" href="index.php" target="_self"> Home </a>
             <a class="menu-item" href="venus.php" target="_self"> Venus </a>
+            <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
+            <?php } ?>
+            <?php if (isset($_SESSION['usuario'])){ ?>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Perfil</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="logout.php">Sair</a>
+                </div>
+            </div>
+            <?php } ?>
         </nav>
     
     </header>
@@ -81,10 +91,7 @@
 
         <div class="feedUltimasReclamacoes">
 
-            <h1>
-                <strong class="enfase">Últimas Interações</strong>
-            </h1>
-
+            
             <table id="postOpinioes">
                 <tr>
                     <td>
@@ -93,6 +100,9 @@
                     </td>
                     <td>
                         <p>Nome do Produto</p>
+                     </td>
+                     <td>
+                        <p>Data</p>
                      </td>
                 </tr>
 
@@ -115,6 +125,9 @@
                     <td>
                         <p><strong class="enfase"> Tipo do Cabelo: </strong></p>
                     </td>
+                    <td>
+                        <p><strong class="enfase"> Categoria </strong></p>
+                    </td>
                 </tr>
 
             </table>
@@ -126,7 +139,7 @@
     </main>
 
     <footer>
-		<img class="logo2" src="imagens/V.png" width="400px">
+		<img class="logo2" src="imagens/V.png">
 	</footer>
 
 </body>

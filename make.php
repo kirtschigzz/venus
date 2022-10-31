@@ -52,10 +52,10 @@
             
             
             <section class="barraPesquisa">
-                <input type="text" class="pesquise" placeholder="Produto / Empresa">
-                <a href="#"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </a>
+                <input type="text" id="pesquise" placeholder="Produto / Empresa">
+                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
             </section>
-            
+
             <section class="cadastre">
                 <form action="reclamacao.php"> 
                     <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>

@@ -35,7 +35,17 @@
         <nav>
             <a class="menu-item" href="index.php" target="_self"> Home </a>
             <a class="menu-item" href="venus.php" target="_self"> Venus </a>
+            <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
+            <?php } ?>
+            <?php if (isset($_SESSION['usuario'])){ ?>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Perfil</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="logout.php">Sair</a>
+                </div>
+            </div>
+            <?php } ?>
         </nav>
         
     </header>
@@ -51,8 +61,8 @@
             
             
             <section class="barraPesquisa">
-                <input type="text" class="pesquise" placeholder="Produto / Empresa">
-                <a href="#"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </a>
+                <input type="text" id="pesquise" placeholder="Produto / Empresa">
+                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
             </section>
             
             <section class="cadastre">

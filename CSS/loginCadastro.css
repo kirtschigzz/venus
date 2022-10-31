@@ -32,6 +32,7 @@ a:hover{
 
 /*HEADER*/
 
+
 header{
   position: fixed;
   top: 0;
@@ -50,7 +51,6 @@ margin: 6px;
 }
 
 nav{ 
-margin-bottom: 0.4px solid #782aac;  
 display: flex;
 gap: 35px;
 font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -60,6 +60,38 @@ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans 
 color: black;
 font-size: 18px;
 }
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #782aac;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 6px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.show {display:block;}
 
 /*MAIN*/
 
