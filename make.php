@@ -25,23 +25,36 @@
 </head>
 
 <body>
-
-<div id="teste">
+<header>
     
-    <header>
-            
+    <?php if (isset($_SESSION['usuario'])){ ?>
+    <a class="menu-item" href="venus.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
+    <?php } ?>
+
+    <?php if (!isset($_SESSION['usuario'])){ ?>
     <a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
-        
-            <nav>
-                <a class="menu-item" href="index.php" target="_self"> Home </a>
-                <a class="menu-item" href="venus.php" target="_self"> Venus </a>
-                <a class="menu-item" href="login.php" target="_self"> Login </a>
-            </nav>
-        
-        </header>
+    <?php } ?>
     
-
-</div>
+        <nav>
+            <section class="barraPesquisa">
+                <input type="text" id="pesquise" placeholder="Produto / Empresa">
+                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+            </section>
+            <a class="menu-item" href="index.php" target="_self"> Home </a>
+            <?php if (!isset($_SESSION['usuario'])){ ?>
+            <a class="menu-item" href="login.php" target="_self"> Login </a>
+            <?php } ?>
+            <?php if (isset($_SESSION['usuario'])){ ?>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Perfil</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="logout.php">Sair</a>
+                </div>
+            </div>
+            <?php } ?>
+        </nav>
+    
+    </header>
 
 
     <main>
@@ -49,13 +62,6 @@
         <div id="esquerda">
 
         <div class="botoes">
-            
-            
-            <section class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa">
-                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </section>
-
             <section class="cadastre">
                 <form action="reclamacao.php"> 
                     <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>
@@ -76,7 +82,6 @@
             </form>
 
         </div>
-        
         </div>
 
 
@@ -84,47 +89,49 @@
 
         <div class="feedUltimasReclamacoes">
 
-            <h1>
-                <strong class="enfase"> Maquiagens </strong>
-            </h1>
-
+            <h3>Últimas Interações | Maquiagens </h3>
+ 
             <table id="postOpinioes">
                 <tr>
-                    <td>
-                       <img src="imagens/V.png" alt="Venus" width="30px"> <p>Barbara Kirtschig</p>
-
+                    <td colspan="3" class="nomeUser">
+                       <img src="imagens/V.png" alt="Venus" width="30px"> <h1>Barbara Kirtschig</h1>
                     </td>
-                    <td>
-                        <p>Nome do Produto</p>
-                     </td>
                 </tr>
 
                 <tr>
-                    <td>
-                        <p><strong class="enfase"> O que a Propaganda dizia?</strong> simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                    <td class="nomeProduto">
+                        <p>Nome do Produto</p> (<p>empresaFabricante</p>)
                     </td>
+                </tr>
+    
+                <tr>
+                    <td class="textoPropaganda">
+                        <h1> <i>"A propaganda dizia que o produto era a prova dágua" </i> </h1> 
+                    </td>
+                <tr>
 
                 <tr> 
-                    <td>
-                        <p><strong class="enfase"> Qual a sua Opinião sobre o produto?</strong> simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                    <td class="textoOpiniao">
+                        <p> Molhei um pouco o rosto e o produto derreteu inteiro. Decepcionada! </p>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>
-                        <p><strong class="enfase"> Tipo da Pele: </strong></p>
+                    <td class="caracteristicas">
+                        <p> Tipo da Pele: </p>
                     </td>
 
-                    <td>
-                        <p><strong class="enfase"> Tipo do Cabelo: </strong></p>
+                    <td class="caracteristicas">
+                        <p> Tipo do Cabelo: </p>
+                    </td>
+                    <td class="caracteristicas">
+                        <p> data </p>
                     </td>
                 </tr>
 
             </table>
-
-
+            
         </div>
-        <div>
 
     </main>
 
