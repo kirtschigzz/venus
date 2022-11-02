@@ -18,10 +18,11 @@
         
         if ($deuCerto){
 
-			header('Location: http://localhost/venustcc/login.php');
+			header("Location: login.php");
 			unset($_POST);
 			die();
-		}
+		}else{
+            echo "erro";        }
 
     }
 

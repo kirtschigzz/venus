@@ -13,7 +13,7 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 	$erro = false;
 
 	if($sql_query->num_rows == 0){
-		echo "O email informado é incorreto";
+		echo "<p> O email informado é incorreto </p>";
 	}else{
 		$usuario = $sql_query->fetch_assoc();
 
@@ -95,14 +95,9 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 
 			<div class="tiposLogin">
 					<a class="tipos" href="loginUser.php"> <button class="ir" type="submit"> Cadastre-se </button> </a>
-					
 			</div>
 
 	</main>
-
-	<footer>
-		<img class="logo2" src="imagens/V.png" width="400px">
-	</footer>
 
 <script src="./js/main.js"> </script>
 </body>

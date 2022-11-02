@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 	include('conexao.php');
 	
@@ -10,7 +10,37 @@
 	if(!isset($_SESSION['usuario'])){
 		header("Location: login.php");	
         die();
+	}else{
+		$usuario = $_SESSION['usuario'];
 	}
+
+
+    //Verificar se a variavel $_POST['nomeProduto'] existe
+	
+	  if(isset($_POST['nomeProduto'])){
+
+		$nomeProduto = $_POST['nomeProduto'];
+		$empresaFabricante = $_POST['empresaFabricante'];
+		$categoria = $_POST['categoria'];
+		$textoPropaganda = $_POST['textoPropaganda'];
+		$textoOpiniao = $_POST['textoOpiniao'];
+		
+		$sql_code = "INSERT INTO opiniao 
+							(nomeProduto, empresaFabricante, categoria, textoPropaganda, textoOpiniao, data, idUsuario) VALUES 
+							('$nomeProduto', '$empresaFabricante', '$categoria', '$textoPropaganda', '$textoOpiniao', NOW(), '$usuario')"; 
+
+		$deuCerto = $mysqli->query($sql_code) or die($mysqli->error);
+
+	
+		if ($deuCerto){
+			header('Location: http://localhost/venustcc/venus.php');
+			unset($_POST);
+			die();
+		}else{
+			echo "<p> ERRO <p>";
+		}
+	}
+		
 ?>
 
 
@@ -60,7 +90,7 @@
 	</div>
 
     
-	<form method="post" action="processa.php">
+	<form method="post" action="">
 		
 			<fieldset class="fieldsets">
 
@@ -71,12 +101,12 @@
 					<label for="nomeProduto"> Nome do Produto </label>
 					<input type="text" name="nomeProduto" id="campoReclamacao" required placeholder="Conforme a embalagem">  
 			
-					<label for="nomeFantasia"> Empresa / Fabricante </label>
-					<input type="text" name="nomeFantasia" id="campoReclamacao"> 
+					<label for="empresaFabricante"> Empresa / Fabricante </label>
+					<input type="text" name="empresaFabricante" id="campoReclamacao"> 
 			
-					<label for="nomeCategoria"> Categoria do Produto </label>
+					<label for="categoria"> Categoria do Produto </label>
 
-					<select id="campoReclamacao" name="nomeCategoria" required>
+					<select id="campoReclamacao" name="categoria" required>
 						<option selected disabled value=""> Selecione </option>
 						<option>Skincare</option>
 						<option>Para o cabelo</option>
