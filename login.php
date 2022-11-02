@@ -64,13 +64,14 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 	
 
 	<main>
+	
+	<div id="teste">
 
-		<section id="titulo">
-			<h1> Faça Login! </h1>
-		</section>
+		<div id="principal">
 
-		<section id="formLogin">
-				<form method="post" action="">
+			<h1 id="titulo"> Faça Login! </h1>
+
+			<form method="post">
 
 				<fieldset>
 
@@ -80,7 +81,7 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 					</div>
 
 					<div class="campo">
-						<label for="senha">Senha </label>
+						<label for="senha"> Senha </label>
 						<input type="password" name="senha" required>
 					</div>
 
@@ -91,12 +92,13 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 				</fieldset>
 
 				</form>
-		</section>
 
 			<div class="tiposLogin">
 					<a class="tipos" href="loginUser.php"> <button class="ir" type="submit"> Cadastre-se </button> </a>
 			</div>
 
+		</div>
+	</div>>
 	</main>
 
 <script src="./js/main.js"> </script>
