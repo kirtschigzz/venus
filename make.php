@@ -12,6 +12,7 @@
         die();
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/venus.css">
+    <link rel="stylesheet" type="text/css" href="css/categorias.css">
     <title>Venus</title>
     
 </head>
@@ -36,10 +37,6 @@
     <?php } ?>
     
         <nav>
-            <section class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa">
-                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </section>
             <a class="menu-item" href="index.php" target="_self"> Home </a>
             <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
@@ -62,24 +59,17 @@
         <div id="esquerda">
 
         <div class="botoes">
+
+            <section class="barraPesquisa">
+                <input type="text" id="pesquise" placeholder="Produto / Empresa">
+                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+            </section>
+
             <section class="cadastre">
                 <form action="reclamacao.php"> 
                     <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>
                 </form>
             </section>
-
-            <form action="skincare.php"> 
-                <button class="categoriasButton" type="submit"> Skincare </button>
-            </form>
-            <form action="make.php"> 
-                <button class="categoriasButton" type="submit"> Maquiagens </button>
-            </form>
-            <form action="cabelo.php"> 
-                <button class="categoriasButton" type="submit"> Para o Cabelo </button>
-            </form>
-            <form action="corpo.php"> 
-                <button class="categoriasButton" type="submit"> Para o Corpo </button>
-            </form>
 
         </div>
         </div>
@@ -130,10 +120,13 @@
                 </tr>
 
             </table>
+
+            
             
         </div>
 
     </main>
+
 
     <footer>
 		<img class="logo2" src="imagens/V.png" width="400px">
