@@ -37,8 +37,11 @@
     <?php } ?>
     
         <nav>
+
             <a class="menu-item" href="index.php" target="_self"> Home </a>
+            <a class="menu-item" href="venus.php" target="_self"> Venus </a>
             <?php if (!isset($_SESSION['usuario'])){ ?>
+
             <a class="menu-item" href="login.php" target="_self"> Login </a>
             <?php } ?>
             <?php if (isset($_SESSION['usuario'])){ ?>
@@ -78,14 +81,16 @@
         <?php 
         
             if(isset ($_GET ['pesquise'])){
+                
                 $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
 
-                $sql_code = "SELECT nomeProduto, empresaFabricante
-                            FROM opiniao
+                $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+                            FROM usuario JOIN opiniao
+                            ON opiniao.idUsuario = usuario.id
                             WHERE nomeProduto 
-                            LIKE '$pesquise' 
+                            LIKE '%$pesquise%' 
                             OR empresaFabricante 
-                            LIKE '$pesquise'";
+                            LIKE '%$pesquise%'";
 
                 $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
@@ -101,7 +106,7 @@
         
                     <?php }else{ 
                         
-                        while ($dados = $sql_query->fetch_assoc()) { ?>
+                        while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
         
                             <div id="direita">
                             
@@ -112,7 +117,7 @@
                                 <table id="postOpinioes">
                                         <tr>
                                             <td colspan="3" class="nomeUser">
-                                            <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php //echo $dados['nome']; ?> </h1>
+                                            <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
                                             </td>
                                         </tr>
                             
@@ -124,26 +129,26 @@
                             
                                         <tr>
                                             <td class="textoPropaganda">
-                                                <h1> <i>"<?php //echo $dados['textoPropaganda']; ?>" </i> </h1> 
+                                                <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
                                             </td>
                                         <tr>
                             
                                         <tr> 
                                             <td class="textoOpiniao">
-                                                <p> <?php //echo $dados['textoOpiniao']; ?> </p>
+                                                <p> <?php echo $dados['textoOpiniao']; ?> </p>
                                             </td>
                                         </tr>
                             
                                         <tr>
                                             <td class="caracteristicas">
-                                                <p> Cabelo - <?php //echo $dados['cabelo']; ?> </p>
+                                                <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
                                             </td>
                             
                                             <td class="caracteristicas">
-                                                <p> Pele - <?php //echo $dados['pele']; ?> </p>
+                                                <p> Pele - <?php echo $dados['pele']; ?> </p>
                                             </td>
                                             <td class="caracteristicas">
-                                                <p> <?php //echo $dados['data']; ?> </p>
+                                                <p> <?php echo $dados['data']; ?> </p>
                                             </td>
                                         </tr>
                             

@@ -105,7 +105,9 @@ main{
 
 #esquerda{
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 50px;   
 }
 
 .botoes{
@@ -113,7 +115,8 @@ main{
     flex-direction: row;
     align-items: center;
     gap: 25px;
-    margin-top: 70px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .cadastre{
@@ -147,11 +150,6 @@ main{
 
 /*LADO DO FEED --------------------------------------------------------------------------------------*/
 
-#direita{
-    text-align: center;
-    margin-top: 30px;
-}
-
 .feedUltimasReclamacoes{
     margin-bottom: 2em;
     display: flex;
@@ -164,6 +162,13 @@ main{
 h1{
     font-weight: 2000;
     font-size: x-large;
+    color: #eb6d59;
+}
+
+h2{
+    font-weight: 2500;
+    font-size: xx-large;
+    color: #782aac;
 }
 
 h3{

@@ -1,18 +1,18 @@
 <?php
 
-	include('conexao.php');
-	
-	if(!isset($_SESSION)){
-		@session_start();
-	}
+include('conexao.php');
+
+if(!isset($_SESSION)){
+    @session_start();
+}
 
 
-	if(!isset($_SESSION['usuario'])){
-		header("Location: login.php");	
-        die();
-	}
+if(!isset($_SESSION['usuario'])){
+    header("Location: login.php");	
+    die();
+}
+
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,20 +36,22 @@
     <a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
     <?php } ?>
     
-        <nav>
-            <a class="menu-item" href="index.php" target="_self"> Home </a>
-            <?php if (!isset($_SESSION['usuario'])){ ?>
-            <a class="menu-item" href="login.php" target="_self"> Login </a>
-            <?php } ?>
-            <?php if (isset($_SESSION['usuario'])){ ?>
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Perfil</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="logout.php">Sair</a>
-                </div>
+    <nav>
+        <a class="menu-item" href="index.php" target="_self"> Home </a>
+        <a class="menu-item" href="venus.php" target="_self"> Venus </a>
+        <?php if (!isset($_SESSION['usuario'])){ ?>
+
+        <a class="menu-item" href="login.php" target="_self"> Login </a>
+        <?php } ?>
+        <?php if (isset($_SESSION['usuario'])){ ?>
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Perfil</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="logout.php">Sair</a>
             </div>
-            <?php } ?>
-        </nav>
+        </div>
+        <?php } ?>
+    </nav>
     
     </header>
 
@@ -58,12 +60,14 @@
 
         <div id="esquerda">
 
+            <h2> Maquiagens </h2>
+
         <div class="botoes">
 
-            <section class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa">
-                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </section>
+            <form class="barraPesquisa">
+                <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
+                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+            </form>
 
             <section class="cadastre">
                 <form action="reclamacao.php"> 
@@ -75,55 +79,144 @@
         </div>
 
 
-        <div id="direita">
+        <?php 
+        
+        if(isset ($_GET ['pesquise'])){
+            
+            $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
 
-        <div class="feedUltimasReclamacoes">
+            $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+                        FROM usuario JOIN opiniao
+                        ON opiniao.idUsuario = usuario.id
+                        WHERE opiniao.categoria = 'Maquiagens'
+                        AND nomeProduto 
+                        LIKE '%$pesquise%' 
+                        OR empresaFabricante 
+                        LIKE '%$pesquise%'";
 
-            <h3>Últimas Interações | Maquiagens </h3>
- 
-            <table id="postOpinioes">
-                <tr>
-                    <td colspan="3" class="nomeUser">
-                       <img src="imagens/V.png" alt="Venus" width="30px"> <h1>Barbara Kirtschig</h1>
-                    </td>
-                </tr>
+            $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
-                <tr>
-                    <td class="nomeProduto">
-                        <p>Nome do Produto</p> (<p>empresaFabricante</p>)
-                    </td>
-                </tr>
+                if($sql_query->num_rows==0){ ?>
     
-                <tr>
-                    <td class="textoPropaganda">
-                        <h1> <i>"A propaganda dizia que o produto era a prova dágua" </i> </h1> 
-                    </td>
-                <tr>
+                    <div id="direita">
+                    <div class="feedUltimasReclamacoes">
+                        <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <strong class = "enfase"> Cadastre sua Opinião!</h3>
+                    </div>
+                    </div>
+    
+                <?php }else{ 
+                    
+                    while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
+    
+                        <div id="direita">
+                        
+                        <div class="feedUltimasReclamacoes">
+                        
+                            <h3> Resultado para a pesquisa "<?php echo "$pesquise" ?>"</h3>
+                        
+                            <table id="postOpinioes">
+                                    <tr>
+                                        <td colspan="3" class="nomeUser">
+                                        <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
+                                        </td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <td class="nomeProduto">
+                                             <p> <?php echo $dados['nomeProduto']; ?>  (  <?php echo $dados['empresaFabricante']; ?> ) <p>
+                                        </td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <td class="textoPropaganda">
+                                            <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
+                                        </td>
+                                    <tr>
+                        
+                                    <tr> 
+                                        <td class="textoOpiniao">
+                                            <p> <?php echo $dados['textoOpiniao']; ?> </p>
+                                        </td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <td class="caracteristicas">
+                                            <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                        </td>
+                        
+                                        <td class="caracteristicas">
+                                            <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                        </td>
+                                        <td class="caracteristicas">
+                                            <p> <?php echo $dados['data']; ?> </p>
+                                        </td>
+                                    </tr>
+                        
+                            </table>      
+                        </div>
+                        </div>
+                        
+        <?php 
+        
+        } } }else{
 
-                <tr> 
-                    <td class="textoOpiniao">
-                        <p> Molhei um pouco o rosto e o produto derreteu inteiro. Decepcionada! </p>
-                    </td>
-                </tr>
+            $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+                            FROM usuario JOIN opiniao
+                                ON opiniao.idUsuario = usuario.id
+                                    WHERE opiniao.categoria = 'Maquiagens'";
 
-                <tr>
-                    <td class="caracteristicas">
-                        <p> Tipo da Pele: </p>
-                    </td>
+            $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
-                    <td class="caracteristicas">
-                        <p> Tipo do Cabelo: </p>
-                    </td>
-                    <td class="caracteristicas">
-                        <p> data </p>
-                    </td>
-                </tr>
+            while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
+    
+                <div id="direita">
+                
+                <div class="feedUltimasReclamacoes">
+                
+                    <table id="postOpinioes">
+                            <tr>
+                                <td colspan="3" class="nomeUser">
+                                <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
+                                </td>
+                            </tr>
+                
+                            <tr>
+                                <td class="nomeProduto">
+                                     <p> <?php echo $dados['nomeProduto']; ?>  (  <?php echo $dados['empresaFabricante']; ?> ) <p>
+                                </td>
+                            </tr>
+                
+                            <tr>
+                                <td class="textoPropaganda">
+                                    <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
+                                </td>
+                            <tr>
+                
+                            <tr> 
+                                <td class="textoOpiniao">
+                                    <p> <?php echo $dados['textoOpiniao']; ?> </p>
+                                </td>
+                            </tr>
+                
+                            <tr>
+                                <td class="caracteristicas">
+                                    <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                </td>
+                
+                                <td class="caracteristicas">
+                                    <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                </td>
+                                <td class="caracteristicas">
+                                    <p> <?php echo $dados['data']; ?> </p>
+                                </td>
+                            </tr>
+                
+                    </table>      
+                </div>
+                </div>
 
-            </table>
-
-            
-            
-        </div>
+                
+        <?php }}?>
 
     </main>
 

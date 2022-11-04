@@ -34,10 +34,6 @@
 
 	
 		if ($deuCerto){
-
-			echo "<script type='javascript'>alert('Opinião Cadastrada com Sucesso!');";
-
-			echo "javascript:window.location='venus.php';</script>";
 			header('Location: http://localhost/venustcc/venus.php');
 			unset($_POST);
 			die();
