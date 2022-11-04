@@ -10,7 +10,6 @@
 		header("Location: login.php");
 		die();
 	}
- 
 
 ?>
 
@@ -40,21 +39,29 @@
     <?php } ?>
     
         <nav>
-            <section class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa">
-                <button id="pesquise"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </section>
+            <form class="barraPesquisa" action="pesquisa.php">
+                <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
+                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+            </form>
+
             <a class="menu-item" href="index.php" target="_self"> Home </a>
+
             <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
             <?php } ?>
+
             <?php if (isset($_SESSION['usuario'])){ ?>
+
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Perfil</button>
+
                 <div id="myDropdown" class="dropdown-content">
+                    <a href="reclamacoesUsuario.php"> Suas Reclamações </a>
                     <a href="logout.php">Sair</a>
                 </div>
+
             </div>
+
             <?php } ?>
         </nav>
     
@@ -134,7 +141,7 @@
                 </tr>
 
             </table>
-            
+        </div>
         </div>
 
     </main>
