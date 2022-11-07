@@ -37,20 +37,29 @@
     <?php } ?>
     
         <nav>
+            <form class="barraPesquisa" action="pesquisa.php">
+                <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
+                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+            </form>
 
             <a class="menu-item" href="index.php" target="_self"> Home </a>
-            <a class="menu-item" href="venus.php" target="_self"> Venus </a>
-            <?php if (!isset($_SESSION['usuario'])){ ?>
 
+            <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
             <?php } ?>
+
             <?php if (isset($_SESSION['usuario'])){ ?>
+
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Perfil</button>
+
                 <div id="myDropdown" class="dropdown-content">
+                    <a href="perfil.php"> Suas Reclamações </a>
                     <a href="logout.php">Sair</a>
                 </div>
+
             </div>
+
             <?php } ?>
         </nav>
     
@@ -87,9 +96,9 @@
                 $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
                             FROM usuario JOIN opiniao
                             ON opiniao.idUsuario = usuario.id
-                            WHERE nomeProduto 
+                            WHERE nomeProduto    
                             LIKE '%$pesquise%' 
-                            OR empresaFabricante 
+                            AND empresaFabricante 
                             LIKE '%$pesquise%'";
 
                 $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
@@ -129,7 +138,7 @@
                             
                                         <tr>
                                             <td class="textoPropaganda">
-                                                <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
+                                                <h1> <i><strong class="enfase"> "<?php echo $dados['textoPropaganda']; ?>" </strong></i> </h1> 
                                             </td>
                                         <tr>
                             

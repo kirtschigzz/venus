@@ -47,6 +47,7 @@
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Perfil</button>
                 <div id="myDropdown" class="dropdown-content">
+					<a href="perfil.php"> Suas Reclamações </a>
                     <a href="logout.php">Sair</a>
                 </div>
             </div>
