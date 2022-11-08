@@ -13,7 +13,9 @@ if(!isset($_SESSION['usuario'])){
 }
 
 ?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -21,13 +23,15 @@ if(!isset($_SESSION['usuario'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/categorias.css">
-    <title>Venus</title>
-    
+    <script type="text/javascript" src="js/main.js"></script>
+    <title>Produtos para o Corpo - Venus </title> 
 </head>
 
 <body>
+
 <header>
     
+    <!-- Somente se o usuário estiver logado, a página Venus poderá ser acessada -->
     <?php if (isset($_SESSION['usuario'])){ ?>
     <a class="menu-item" href="venus.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
     <?php } ?>
@@ -38,54 +42,60 @@ if(!isset($_SESSION['usuario'])){
     
         <nav>
 
-            <a class="menu-item" href="index.php" target="_self"> Home </a>
+            <!-- Definindo as opções do menu de navegação que o usuário logado terá -->
+            <a class="menu-item" href="venus.php" target="_self"> Venus </a>
 
+            <!-- Se o usuário não estiver logado, terá somente a opção da página Login -->
             <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
             <?php } ?>
 
+            
+            <!-- Se o usuário estiver logado, a opção de entrar no seu perfil e de sair serão mostradas -->
             <?php if (isset($_SESSION['usuario'])){ ?>
 
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Perfil</button>
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">Perfil</button>
 
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="perfil.php"> Suas Reclamações </a>
-                    <a href="logout.php">Sair</a>
-                </div>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="perfil.php"> Suas Reclamações </a>
+                            <a href="logout.php">Sair</a>
+                        </div>
 
-            </div>
-
+                    </div>
             <?php } ?>
+
         </nav>
     
-    </header>
+</header>
 
 
     <main>
 
         <div id="esquerda">
 
-        <div class="botoes">
+            <h2> Produtos para o Corpo </h2>
 
-            <form class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
-                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </form>
+            <div class="botoes">
 
-            <section class="cadastre">
-                <form action="reclamacao.php"> 
-                    <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>
+                <form class="barraPesquisa">
+                    <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
+                    <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
                 </form>
-            </section>
 
+                <section class="cadastre">
+                    <form action="reclamacao.php"> 
+                        <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>
+                    </form>
+                </section>
+
+            </div>
         </div>
-        </div>
 
 
-        <?php 
-        
-        if(isset ($_GET ['pesquise'])){
+<?php   if(isset ($_GET ['pesquise'])){
+
+        // Se o usuário pesquisar, o sistema criará uma query, que contém o select no banco, com os resultados 
             
             $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
 
@@ -100,28 +110,33 @@ if(!isset($_SESSION['usuario'])){
 
             $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
-                if($sql_query->num_rows==0){ ?>
+        // Se não houver resultado para a pesquisa, o sistema mostrará a mensagem
+
+            if($sql_query->num_rows==0){ ?>
     
-                    <div id="direita">
+                <div id="direita">
                     <div class="feedUltimasReclamacoes">
                         <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <strong class = "enfase"> Cadastre sua Opinião!</h3>
                     </div>
-                    </div>
+                </div>
     
-                <?php }else{ 
-                    
-                    while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
+    <?php   }else{ 
+
+                // Enquanto houverem resultados para a pesquisa, o sistema os mostrará através de uma tabela   
+
+                while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
     
-                        <div id="direita">
+                    <div id="direita">
                         
                         <div class="feedUltimasReclamacoes">
                         
                             <h3> Resultado para a pesquisa "<?php echo "$pesquise" ?>"</h3>
                         
-                            <table id="postOpinioes">
+                                <table id="postOpinioes">
+
                                     <tr>
                                         <td colspan="3" class="nomeUser">
-                                        <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
+                                        <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
                                         </td>
                                     </tr>
                         
@@ -151,23 +166,26 @@ if(!isset($_SESSION['usuario'])){
                                         <td class="caracteristicas">
                                             <p> Pele - <?php echo $dados['pele']; ?> </p>
                                         </td>
+
                                         <td class="caracteristicas">
                                             <p> <?php echo $dados['data']; ?> </p>
                                         </td>
                                     </tr>
                         
-                            </table>      
+                                </table>      
                         </div>
-                        </div>
+                    </div>
                         
         <?php 
         
         } } }else{
 
-            $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
-                            FROM usuario JOIN opiniao
-                                ON opiniao.idUsuario = usuario.id
-                                    WHERE opiniao.categoria = 'Para o corpo'";
+            // Se o usuário não pesquisar, o sistema mostrará todas as reclamações
+
+            $sql_code ="SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+                        FROM usuario JOIN opiniao
+                        ON opiniao.idUsuario = usuario.id
+                        WHERE opiniao.categoria = 'Para o corpo'";
 
             $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
@@ -175,9 +193,9 @@ if(!isset($_SESSION['usuario'])){
     
                 <div id="direita">
                 
-                <div class="feedUltimasReclamacoes">
+                    <div class="feedUltimasReclamacoes">
                 
-                    <table id="postOpinioes">
+                        <table id="postOpinioes">
                             <tr>
                                 <td colspan="3" class="nomeUser">
                                 <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
@@ -215,15 +233,15 @@ if(!isset($_SESSION['usuario'])){
                                 </td>
                             </tr>
                 
-                    </table>      
+                        </table>      
                 </div>
-                </div>
+            </div>
 
                
             
             <?php }} ?>
 
-    </main>
+</main>
 
 
     <footer>

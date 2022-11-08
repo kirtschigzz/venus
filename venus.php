@@ -14,6 +14,7 @@
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -22,35 +23,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/venus.css">
     <script type="text/javascript" src="js/main.js"></script>
-
     <title>Venus</title>
     
 </head>
 
 <body>
-    <header>
-    
-    <?php if (isset($_SESSION['usuario'])){ ?>
-    <a class="menu-item" href="venus.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
-    <?php } ?>
 
-    <?php if (!isset($_SESSION['usuario'])){ ?>
+<header>
+
+    <!-- Somente os usuários logados terão acesso a página Venus -->
+
     <a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
-    <?php } ?>
     
-        <nav>
-            <form class="barraPesquisa" action="pesquisa.php">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
-                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </form>
+    <nav>
 
-            <a class="menu-item" href="index.php" target="_self"> Home </a>
+        <form class="barraPesquisa" action="pesquisa.php">
+            <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
+            <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+        </form>
 
-            <?php if (!isset($_SESSION['usuario'])){ ?>
+        <!-- Definindo as opções que os usuários terão no menu  -->
+
+<?php   if (!isset($_SESSION['usuario'])){ 
+
+        //Se o usuário não estiver logado, aparecerá a opção de login ?>
+
             <a class="menu-item" href="login.php" target="_self"> Login </a>
-            <?php } ?>
 
-            <?php if (isset($_SESSION['usuario'])){ ?>
+<?php   } ?>
+
+<?php   if (isset($_SESSION['usuario'])){ 
+
+        // Se o usuário estiver logado, aparecerá a opção de Perfil ?>
 
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Perfil</button>
@@ -62,17 +66,18 @@
 
             </div>
 
-            <?php } ?>
-        </nav>
+<?php } ?>
+
+    </nav>
     
-    </header>
+</header>
 
+<main>
 
-    <main>
-
-        <div id="esquerda">
+    <div id="esquerda">
 
         <div class="botoes">
+
             <section class="cadastre">
                 <form action="reclamacao.php"> 
                     <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>
@@ -93,58 +98,57 @@
             </form>
 
         </div>
-        </div>
+    </div>
 
 
-        <div id="direita">
+    <div id="direita">
 
         <div class="feedUltimasReclamacoes">
 
             <h3>Últimas Interações</h3>
  
-            <table id="postOpinioes">
-                <tr>
-                    <td colspan="3" class="nomeUser">
-                       <img src="imagens/V.png" alt="Venus" width="30px"> <h1>Barbara Kirtschig</h1>
-                    </td>
-                </tr>
+                <table id="postOpinioes">
+                    <tr>
+                        <td colspan="3" class="nomeUser">
+                        <img src="imagens/V.png" alt="Venus" width="30px"> <h1>Barbara Kirtschig</h1>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td class="nomeProduto">
-                        <p>Nome do Produto</p> (<p>empresaFabricante</p>)
-                    </td>
-                </tr>
-    
-                <tr>
-                    <td class="textoPropaganda">
-                        <h1> <i>"A propaganda dizia que o produto era a prova dágua" </i> </h1> 
-                    </td>
-                <tr>
+                    <tr>
+                        <td class="nomeProduto">
+                            <p>Nome do Produto</p> (<p>empresaFabricante</p>)
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td class="textoPropaganda">
+                            <h1> <i>"A propaganda dizia que o produto era a prova dágua" </i> </h1> 
+                        </td>
+                    <tr>
 
-                <tr> 
-                    <td class="textoOpiniao">
-                        <p> Molhei um pouco o rosto e o produto derreteu inteiro. Decepcionada! </p>
-                    </td>
-                </tr>
+                    <tr> 
+                        <td class="textoOpiniao">
+                            <p> Molhei um pouco o rosto e o produto derreteu inteiro. Decepcionada! </p>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td class="caracteristicas">
-                        <p> Tipo da Pele: </p>
-                    </td>
+                    <tr>
+                        <td class="caracteristicas">
+                            <p> Tipo da Pele: </p>
+                        </td>
 
-                    <td class="caracteristicas">
-                        <p> Tipo do Cabelo: </p>
-                    </td>
-                    <td class="caracteristicas">
-                        <p> data </p>
-                    </td>
-                </tr>
-
-            </table>
+                        <td class="caracteristicas">
+                            <p> Tipo do Cabelo: </p>
+                        </td>
+                        <td class="caracteristicas">
+                            <p> data </p>
+                        </td>
+                    </tr>
+                </table>
         </div>
-        </div>
+    </div>
 
-    </main>
+</main>
 
     <footer>
 		<img class="logo2" src="imagens/V.png">

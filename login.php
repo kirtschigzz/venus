@@ -2,9 +2,13 @@
 
 if (isset($_POST ['email']) && ($_POST ['senha'])){
 
+//Se tiver o post do email e senha, o sistema criará uma query para consultar as informações no banco de dados
+
 	include('conexao.php');
 
-	$email = $mysqli->escape_string ($_POST ['email']);
+	// Escape string evita uma injeção maldosa dentro do banco de dados
+
+	$email = $mysqli->escape_string ($_POST ['email']); 
 	$senha = $_POST ['senha'];
 
 	$sql_code = "SELECT * FROM usuario WHERE email = '$email'";
@@ -13,28 +17,31 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 	$erro = false;
 
 	if($sql_query->num_rows == 0){
+
 		echo "<p> O email informado é incorreto </p>";
+
 	}else{
+
 		$usuario = $sql_query->fetch_assoc();
 
 		if (!password_verify($senha, $usuario['senha'])){
+
 			echo "senha incorreta";
+
 		}else{
+
 			if(!isset($_SESSION)){
+
 				@session_start();
 
 				$_SESSION['usuario'] = $usuario['id'];
 
-				header("Location: venus.php");
-			}
-		}
-
-	}
-}
-
+				header("Location: venus.php");		
+		}}}}
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -56,30 +63,12 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 		
 		<nav>
             <a class="menu-item" href="index.php" target="_self"> Home </a>
-
-            <?php if (!isset($_SESSION['usuario'])){ ?>
-            <a class="menu-item" href="login.php" target="_self"> Login </a>
-            <?php } ?>
-
-            <?php if (isset($_SESSION['usuario'])){ ?>
-
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Perfil</button>
-
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="perfil.php"> Suas Reclamações </a>
-                    <a href="logout.php">Sair</a>
-                </div>
-
-            </div>
-
-            <?php } ?>
         </nav>
 		
 	</header>
 	
 
-	<main>
+<main>
 	
 	<div id="teste">
 
@@ -87,35 +76,33 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 
 			<h1 id="titulo"> Faça Login! </h1>
 
-			<form method="post">
+				<form method="post">
 
-				<fieldset>
+					<fieldset>
 
-					<div class="campo">
-						<label for="email"> Email </label>
-						<input type="email" name="email" required>
-					</div>
+						<div class="campo">
+							<label for="email"> Email </label>
+							<input type="email" name="email" required>
+						</div>
 
-					<div class="campo">
-						<label for="senha"> Senha </label>
-						<input type="password" name="senha" required>
-					</div>
+						<div class="campo">
+							<label for="senha"> Senha </label>
+							<input type="password" name="senha" required>
+						</div>
 
-					<div class="campo1">
-						<button id="logar" type="submit"> Logar </button>
-					</div>
+						<div class="campo1">
+							<button id="logar" type="submit"> Logar </button>
+						</div>
 
-				</fieldset>
+					</fieldset>
 
 				</form>
 
 			<div class="tiposLogin">
 					<a class="tipos" href="loginUser.php"> <button class="ir" type="submit"> Cadastre-se </button> </a>
 			</div>
-
 		</div>
-	</div>>
-	</main>
+</main>
 
 <script src="./js/main.js"> </script>
 </body>

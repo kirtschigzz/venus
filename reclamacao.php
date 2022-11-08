@@ -18,7 +18,7 @@
 
     //Verificar se a variavel $_POST['nomeProduto'] existe
 	
-	  if(isset($_POST['nomeProduto'])){
+	if(isset($_POST['nomeProduto'])){
 
 		$nomeProduto = $_POST['nomeProduto'];
 		$empresaFabricante = $_POST['empresaFabricante'];
@@ -31,21 +31,13 @@
 							('$nomeProduto', '$empresaFabricante', '$categoria', '$textoPropaganda', '$textoOpiniao', NOW(), '$usuario')"; 
 
 		$deuCerto = $mysqli->query($sql_code) or die($mysqli->error);
-
-	
-		if ($deuCerto){
-			header('Location: http://localhost/venustcc/venus.php');
-			unset($_POST);
-			die();
-		}else{
-			echo "<p> ERRO <p>";
-		}
 	}
 		
 ?>
 
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -54,8 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/reclamacao.css">
 	<script type="text/javascript" src="js/main.js"></script>
-
-    <title>Cadastro de Opinião</title>
+    <title>Cadastro de Opinião - Venus </title>
 	
 </head>
 
@@ -63,35 +54,41 @@
     
 <header>
             
-<a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
+	<a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
 		
-		<nav>
+	<nav>
+	<!-- Definindo as opções do menu do usuário -->
 
-            <a class="menu-item" href="venus.php" target="_self"> Venus </a>
+		<a class="menu-item" href="venus.php" target="_self"> Venus </a>
 
-            <?php if (!isset($_SESSION['usuario'])){ ?>
-            <a class="menu-item" href="login.php" target="_self"> Login </a>
-            <?php } ?>
+<?php 	if (!isset($_SESSION['usuario'])){ 
 
-            <?php if (isset($_SESSION['usuario'])){ ?>
+		//Se o usuário não estiver logado, aparecerá a opção de login ?>
 
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Perfil</button>
+		<a class="menu-item" href="login.php" target="_self"> Login </a>
 
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="perfil.php"> Suas Reclamações </a>
-                    <a href="logout.php">Sair</a>
-                </div>
+<?php 	} 
 
-            </div>
+		if (isset($_SESSION['usuario'])){ 
 
-            <?php } ?>
-        </nav>
+		//Se o usuário estiver logado, aparecerá a opção de perfil ?>
+
+		<div class="dropdown">
+			<button onclick="myFunction()" class="dropbtn">Perfil</button>
+
+			<div id="myDropdown" class="dropdown-content">
+				<a href="perfil.php"> Suas Reclamações </a>
+				<a href="logout.php">Sair</a>
+			</div>
+		</div>
+
+<?php 	} ?>
+
+	</nav>
 		
-		</header>
+</header>
 	
-
-	<main id="pagCReclamacao"> 
+<main id="pagCReclamacao"> 
 
 	<div id="tituloFormReclamacao">
 		<h1> Preencha os dados para postar sua <br> <strong class="enfase"> opinião </strong></h1>
@@ -100,9 +97,9 @@
     
 	<form method="post" action="">
 		
-			<fieldset class="fieldsets">
+		<fieldset class="fieldsets">
 
-				<label id="tituloLabel"> Sobre o Produto </label>
+			<label id="tituloLabel"> Sobre o Produto </label>
 
 				<div class="campo">
 
@@ -121,7 +118,7 @@
 						<option>Para o corpo</option>
 						<option>Maquiagens</option>
 					</select>
-				
+			
 					<label for="textoPropaganda"> O que a propaganda prometia? </label>
 					<textarea name="textoPropaganda" id="textcampoReclamacao" rows="6"></textarea>
 			
@@ -134,17 +131,25 @@
 					<button id="postar" type="submit" name="cadastrarOpiniao"> Postar Reclamação </button>
 				</div>
 
-			</fieldset>
-
-		</form>
+		</fieldset>
+	</form>
 	
-	</main>
+</main>
 
     <footer id="rodape">
         <img class="logo2" src="imagens/V.png" width="400px">
     </footer>
 
-<script src="./js/main.js"> </script>   
-</body>
+<script src="./js/main.js"> </script>
 
+</body>
 </html>
+
+<!-- if ($deuCerto){
+			header('Location: http://localhost/venustcc/venus.php');
+			unset($_POST);
+			die();
+		}else{
+			echo "<p> ERRO <p>";
+		}
+		-- 
