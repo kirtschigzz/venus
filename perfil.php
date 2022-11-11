@@ -15,7 +15,7 @@ if(!isset($_SESSION['usuario'])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -158,6 +158,22 @@ if(!isset($_SESSION['usuario'])){
                                 </table>      
                             </div>
                         </div>
+                
+                        <?php if(isset($_POST['excluir'])){
+    
+                            $sql_code = "DELETE FROM opiniao
+                                        WHERE opiniao.id = '$opiniaoid'";
+
+                            $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
+
+                            if($sql_query){ ?>
+
+                                <div id="feed">
+                                    <h1>Opinião Deletada com Sucesso!</h1>
+                                    <h1> <a href="perfil.php">Voltar para seu Perfil </a> </h1>
+                                </div>
+
+                        <?php die(); }};?>
                         
 <?php 
         

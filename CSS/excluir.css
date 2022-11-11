@@ -1,0 +1,53 @@
+a{
+    text-decoration: none;
+  
+}
+
+a:link, a:visited{
+    color:#782aac;
+  
+}
+
+a:hover{
+    color:#eb6d59;
+    background-position: right bottom;
+ 
+}
+
+form{
+    background-color: #090909;
+}
+
+button:hover {
+    color: #eb6d59;
+}
+
+body{
+    background-color: black;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+#principal{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 40px;
+}
+
+
+h1{
+    color: #eb6d59;
+}
+
+#botao-sim{
+    background-color: #be12b5;
+    color: #ffffff;
+    border-radius: 40px;
+    font-size: 20px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
