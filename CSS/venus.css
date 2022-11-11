@@ -49,13 +49,13 @@ header{
 
 nav{ 
   display: flex;
-  gap: 35px;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  gap: 8px;
 }
 
 .menu-item{
   color: black;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 /* Dropdown Button */
@@ -93,31 +93,15 @@ nav{
 /*MAIN*/
 
 main{
-    margin-top: 70px;
+    margin-top: 150px;
     margin-bottom: 50px;
     display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* LADO DOS BOTÕES ------------------------------------------------------------------------------*/
 
-#esquerda{
-    display: flex;
-    justify-content: left;
-}
-
-.botoes{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-left: 11.5em;
-    margin-top: 70px;
-}
-
-.cadastre{
-    display: flex;
-    justify-content: space-between;
-}
 
 .barraPesquisa{
     display: flex;
@@ -145,19 +129,15 @@ main{
 
 /*LADO DO FEED --------------------------------------------------------------------------------------*/
 
-#direita{
-    text-align: center;
+#principal{
+    flex-direction: column;
 }
 
-.feedUltimasReclamacoes{
-    margin-top: 25px;
-    margin-left: 40em;
+.feed{
     margin-bottom: 2em;
     display: flex;
-    flex-direction: column;
     gap: 25px;
     text-align: left;
-    border: 2px #be12b5;
 }
 
 h1{
@@ -170,15 +150,16 @@ h3{
     text-align: right;
 }
 
-/*POSTS*/
+/*POSTS*/   
 
-#postOpinioes{ 
+#post{ 
     border-radius: 10px;
     color: #ffffff;
     width: 700px;
     border-spacing: 0px;
     margin-bottom: 2em;
     background-color: #090909;
+    flex-direction: column;
 }
 
 th{
@@ -235,12 +216,12 @@ td{
 /*BUTTOMS*/
 
 .cadastreReclamacao{
-    background-color: #be12b5;
+    background-color: #4f4f4f;
     color: #ffffff;
-    width: 305px;
-    height: 50px;
+    width: 150px;
+    height: 25px;
     border-radius: 40px;
-    font-size: 20px;
+    font-size: 15px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     cursor: pointer;
@@ -249,10 +230,10 @@ td{
 .categoriasButton{
     background-color: #782aac;
     color: #ffffff;
-    width: 305px;
-    height: 50px;
+    width: 100px;
+    height: 25px;
     border-radius: 40px;
-    font-size: 20px;
+    font-size: 15px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     cursor: pointer;

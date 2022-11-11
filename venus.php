@@ -41,6 +41,24 @@
             <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
             <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
         </form>
+        
+        <form action="reclamacao.php"> 
+            <button class="cadastreReclamacao" type="submit"> Opine! </button>
+        </form>
+
+
+        <form action="skincare.php"> 
+            <button class="categoriasButton" type="submit"> Skincare </button>
+        </form>
+        <form action="make.php"> 
+            <button class="categoriasButton" type="submit"> Makes </button>
+        </form>
+        <form action="cabelo.php"> 
+            <button class="categoriasButton" type="submit"> Cabelo </button>
+        </form>
+        <form action="corpo.php"> 
+            <button class="categoriasButton" type="submit"> Corpo </button>
+        </form>
 
         <!-- Definindo as opções que os usuários terão no menu  -->
 
@@ -74,79 +92,87 @@
 
 <main>
 
-    <div id="esquerda">
 
-        <div class="botoes">
+<?php   if (isset($_SESSION['usuario'])){
 
-            <section class="cadastre">
-                <form action="reclamacao.php"> 
-                    <button class="cadastreReclamacao" type="submit"> Cadastre uma Reclamação </button>
-                </form>
-            </section>
+        // Se o usuário estiver logado, o sistema criará uma query com as reclamações dele a partir do id obtido na sessão 
 
-            <form action="skincare.php"> 
-                <button class="categoriasButton" type="submit"> Skincare </button>
-            </form>
-            <form action="make.php"> 
-                <button class="categoriasButton" type="submit"> Maquiagens </button>
-            </form>
-            <form action="cabelo.php"> 
-                <button class="categoriasButton" type="submit"> Para o Cabelo </button>
-            </form>
-            <form action="corpo.php"> 
-                <button class="categoriasButton" type="submit"> Para o Corpo </button>
-            </form>
+            $usuario = $mysqli->real_escape_string($_SESSION['usuario']);
 
-        </div>
-    </div>
+            $sql_code = "SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+                        FROM usuario JOIN opiniao
+                        ON opiniao.idUsuario = usuario.id
+                        LIMIT 10";
 
+            $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
-    <div id="direita">
+            if($sql_query->num_rows==0){ 
+            // Se a query não encontrar nenhuma reclamação, mostrará essa mensagem ?>
+                <div>
+                    <div class="feedUltimasReclamacoes">
+                        <h3> Você ainda não opinou :( </h3>
+                    </div>
+                </div>
 
-        <div class="feedUltimasReclamacoes">
+<?php       }else{
 
-            <h3>Últimas Interações</h3>
- 
-                <table id="postOpinioes">
-                    <tr>
-                        <td colspan="3" class="nomeUser">
-                        <img src="imagens/V.png" alt="Venus" width="30px"> <h1>Barbara Kirtschig</h1>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="nomeProduto">
-                            <p>Nome do Produto</p> (<p>empresaFabricante</p>)
-                        </td>
-                    </tr>
+                // Enquanto a query encontrar resultados, os mostrará em uma tabela 
         
-                    <tr>
-                        <td class="textoPropaganda">
-                            <h1> <i>"A propaganda dizia que o produto era a prova dágua" </i> </h1> 
-                        </td>
-                    <tr>
+                while ($dados = mysqli_fetch_assoc($sql_query)) { 
 
-                    <tr> 
-                        <td class="textoOpiniao">
-                            <p> Molhei um pouco o rosto e o produto derreteu inteiro. Decepcionada! </p>
-                        </td>
-                    </tr>
+                    $opiniaoid = $dados['id']; ?>
 
-                    <tr>
-                        <td class="caracteristicas">
-                            <p> Tipo da Pele: </p>
-                        </td>
+                        <div id="principal">
+                            
+                            <div class="feed">
+                            
+                                <table id="post">
+                                    
+                                    <tr class="primeira-linha">
+                                        <td class = "nome-user" colspan="3">
+                                            <div> <img class = "venus" src="imagens/V.png" alt="Venus" width="30px"> </div>
 
-                        <td class="caracteristicas">
-                            <p> Tipo do Cabelo: </p>
-                        </td>
-                        <td class="caracteristicas">
-                            <p> data </p>
-                        </td>
-                    </tr>
-                </table>
-        </div>
-    </div>
+                                            <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
+                                        </td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <td class="nomeProduto">
+                                                <p> <?php echo $dados['nomeProduto']; ?>  (  <?php echo $dados['empresaFabricante']; ?> ) <p>
+                                        </td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <td class="textoPropaganda">
+                                            <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
+                                        </td>
+                                    <tr>
+                        
+                                    <tr> 
+                                        <td class="textoOpiniao">
+                                            <p> <?php echo $dados['textoOpiniao']; ?> </p>
+                                        </td>
+                                    </tr>
+                        
+                                    <tr>
+                                        <td class="caracteristicas">
+                                            <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                        </td>
+                        
+                                        <td class="caracteristicas">
+                                            <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                        </td>
+
+                                        <td class="caracteristicas">
+                                            <p> <?php echo $dados['data']; ?> </p>
+                                        </td>
+                                    </tr>
+                        
+                                </table>      
+                            </div>
+                        </div>
+
+<?php }}} ?>
 
 </main>
 
