@@ -21,7 +21,7 @@
                                     VALUES ('$email', '$senha','$nome','$sobrenome', '$pele', '$cabelo', '$genero')");
 
         if ($deuCerto){
-			header("Location: login.php");
+			header("Location: mensagem.php");
 			unset($_POST);
 			die();
 		}else{

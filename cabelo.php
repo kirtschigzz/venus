@@ -141,9 +141,11 @@ if(!isset($_SESSION['usuario'])){
                         
                                 <table id="postOpinioes">
 
-                                    <tr>
-                                        <td colspan="3" class="nomeUser">
-                                        <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
+                                    <tr class="primeira-linha">
+                                        <td class = "nome-user" colspan="3">
+                                            <div> <img class = "venus" src="imagens/V.png" alt="Venus" width="30px"> </div>
+
+                                            <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
                                         </td>
                                     </tr>
                         

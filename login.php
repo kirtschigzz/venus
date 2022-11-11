@@ -78,31 +78,33 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 
 				<form method="post">
 
-					<fieldset>
+				<fieldset>
 
-						<div class="campo">
-							<label for="email"> Email </label>
-							<input type="email" name="email" required>
-						</div>
+					<div class="campo">
+						<label for="email"> Email </label>
+						<input type="email" name="email" required>
+					</div>
 
-						<div class="campo">
-							<label for="senha"> Senha </label>
-							<input type="password" name="senha" required>
-						</div>
+					<div class="campo">
+						<label for="senha"> Senha </label>
+						<input type="password" name="senha" required>
+					</div>
 
-						<div class="campo1">
-							<button id="logar" type="submit"> Logar </button>
-						</div>
+					<div class="campo1">
+						<button id="logar" type="submit"> Logar </button>
+					</div>
 
-					</fieldset>
+				</fieldset>
 
 				</form>
 
 			<div class="tiposLogin">
 					<a class="tipos" href="loginUser.php"> <button class="ir" type="submit"> Cadastre-se </button> </a>
 			</div>
+
 		</div>
-</main>
+	</div>>
+	</main>
 
 <script src="./js/main.js"> </script>
 </body>

@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/categorias.css">
     <script type="text/javascript" src="js/main.js"></script>
-    <title>Resultados da Pesquisa - Venus </title>  
+    <title> Resultados da Pesquisa - Venus </title>  
 </head>
 
 <body>
@@ -42,7 +42,7 @@
     
     <nav>
 
-        <a class="menu-item" href="index.php" target="_self"> Home </a>
+        <a class="menu-item" href="venus.php" target="_self"> Venus </a>
 
         <!-- Definindo as opções do menu de navegação que o usuário logado terá -->
 
@@ -99,16 +99,11 @@
     if(isset ($_GET ['pesquise'])){
     
     // Se o usuário pesquisar, será criada uma query com a consulta no banco de dados
-
+        
+        
         $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
 
-        $sql_code ="SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
-                    FROM usuario JOIN opiniao
-                    ON opiniao.idUsuario = usuario.id
-                    WHERE nomeProduto    
-                    LIKE '%$pesquise%' 
-                    AND empresaFabricante 
-                    LIKE '%$pesquise%'";
+        $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante FROM opiniao JOIN usuario ON opiniao.idUsuario = usuario.id WHERE opiniao.empresaFabricante LIKE '%$pesquise%' OR opiniao.nomeProduto LIKE '%$pesquise%'";
 
         $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
@@ -136,11 +131,13 @@
                             
                             <table id="postOpinioes">
 
-                                <tr>
-                                    <td colspan="3" class="nomeUser">
-                                    <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
-                                    </td>
-                                </tr>
+                                <tr class="primeira-linha">
+                                        <td class = "nome-user" colspan="3">
+                                            <div> <img class = "venus" src="imagens/V.png" alt="Venus" width="30px"> </div>
+
+                                            <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
+                                        </td>
+                                    </tr>
                     
                                 <tr>
                                     <td class="nomeProduto">

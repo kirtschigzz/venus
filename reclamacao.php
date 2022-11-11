@@ -31,6 +31,12 @@
 							('$nomeProduto', '$empresaFabricante', '$categoria', '$textoPropaganda', '$textoOpiniao', NOW(), '$usuario')"; 
 
 		$deuCerto = $mysqli->query($sql_code) or die($mysqli->error);
+
+		if ($deuCerto){
+			header('Location: http://localhost/venustcc/mensagem.php');
+			unset($_POST);
+			die();
+		}
 	}
 		
 ?>
