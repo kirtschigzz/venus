@@ -80,7 +80,7 @@ if(!isset($_SESSION['usuario'])){
             
             $usuario = $mysqli->real_escape_string($_SESSION['usuario']);
 
-            $sql_code = "SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+            $sql_code = "SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
                         FROM usuario JOIN opiniao
                         ON opiniao.idUsuario = usuario.id
                         WHERE usuario.id = '". $_SESSION['usuario']."'";
@@ -148,6 +148,10 @@ if(!isset($_SESSION['usuario'])){
                         
                                         <td class="caracteristicas">
                                             <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                        </td>
+
+                                        <td class="caracteristicas">
+                                            <p> <?php echo $dados['categoria']; ?> </p>
                                         </td>
 
                                         <td class="caracteristicas">

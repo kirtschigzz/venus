@@ -1,20 +1,20 @@
 <?php
 
-	include('conexao.php');
+include('conexao.php');
 
-	if(!isset($_SESSION)){
-		@session_start();
-	}
-		
-	if(!isset($_SESSION['usuario'])){
-		header("Location: login.php");
-		die();
-	}
+if(!isset($_SESSION)){
+    @session_start();
+}
+
+
+if(!isset($_SESSION['usuario'])){
+    header("Location: login.php");	
+    die();
+}
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -23,58 +23,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/venus.css">
     <script type="text/javascript" src="js/main.js"></script>
-    <title>Venus</title>
-    
+    <title>Maquiagens - Venus </title>    
 </head>
 
 <body>
 
 <header>
-
-    <!-- Somente os usuários logados terão acesso a página Venus -->
-
-    <a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
     
-    <nav>
+    <!-- Somente se o usuário estiver logado, a página Venus poderá ser acessada -->
 
-        <form class="barraPesquisa" action="pesquisa.php">
-            <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
-            <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-        </form>
-        
-        <form action="reclamacao.php"> 
-            <button class="cadastreReclamacao" type="submit"> Opine! </button>
-        </form>
+    <?php if (isset($_SESSION['usuario'])){ ?>
+    <a class="menu-item" href="venus.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
+    <?php } ?>
 
+    <?php if (!isset($_SESSION['usuario'])){ ?>
+    <a class="menu-item" href="index.php" target="_self"> <img class="logo-menu" src="imagens/V.png"> </a>
+    <?php } ?>
+    
+        <nav>
 
-        <form action="skincare.php"> 
-            <button class="categoriasButton" type="submit"> Skincare </button>
-        </form>
-        <form action="make.php"> 
-            <button class="categoriasButton" type="submit"> Makes </button>
-        </form>
-        <form action="cabelo.php"> 
-            <button class="categoriasButton" type="submit"> Cabelo </button>
-        </form>
-        <form action="corpo.php"> 
-            <button class="categoriasButton" type="submit"> Corpo </button>
-        </form>
+            <form action="pesquisa.php" class="barraPesquisa">
+                <input type="text" id="pesquise" placeholder="Produto? Empresa?" name="pesquise">
+                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+            </form>   
 
-        <!-- Definindo as opções que os usuários terão no menu  -->
+            <form action="reclamacao.php"> 
+                <button class="cadastreReclamacao" type="submit"> Opine! </button>
+            </form>
 
-<?php   if (!isset($_SESSION['usuario'])){ 
+            <form action="skincare.php"> 
+                <button class="categoriasButton" type="submit"> Skincare </button>
+            </form>
 
-        //Se o usuário não estiver logado, aparecerá a opção de login ?>
+            <form action="make.php"> 
+                <button class="categoriasButton" type="submit"> Makes </button>
+            </form>
 
+            <form action="cabelo.php"> 
+                <button class="categoriasButton" type="submit"> Cabelo </button>
+            </form>
+            
+            <form action="corpo.php"> 
+                <button class="categoriasButton" type="submit"> Corpo </button>
+            </form>
+
+            <!-- Definindo as opções do menu de navegação que o usuário logado terá -->
+
+            <a class="venus-item" href="venus.php" target="_self"> Venus </a>
+
+            <!-- Se o usuário não estiver logado, terá somente a opção da página Login -->
+
+            <?php if (!isset($_SESSION['usuario'])){ ?>
             <a class="menu-item" href="login.php" target="_self"> Login </a>
+            <?php } ?>
 
-<?php   } ?>
+            <!-- Se o usuário estiver logado, a opção de entrar no seu perfil e de sair serão mostradas -->
 
-<?php   if (isset($_SESSION['usuario'])){ 
-
-        // Se o usuário estiver logado, aparecerá a opção de Perfil ?>
+            <?php if (isset($_SESSION['usuario'])){ ?>
 
             <div class="dropdown">
+
                 <button onclick="myFunction()" class="dropbtn">Perfil</button>
 
                 <div id="myDropdown" class="dropdown-content">
@@ -84,100 +92,92 @@
 
             </div>
 
-<?php } ?>
+            <?php } ?>
 
-    </nav>
+        </nav>
     
 </header>
 
-<main>
+
+        <main>
+
+            <h2> últimas Interações </h2>
 
 
-<?php   if (isset($_SESSION['usuario'])){
+        <?php 
+        
+            if(isset ($_SESSION ['usuario'])){
 
-        // Se o usuário estiver logado, o sistema criará uma query com as reclamações dele a partir do id obtido na sessão 
+            // Se o usuário não pesquisar, o sistema mostrará todas as reclamações
 
-            $usuario = $mysqli->real_escape_string($_SESSION['usuario']);
-
-            $sql_code = "SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante
+            $sql_code ="SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
                         FROM usuario JOIN opiniao
                         ON opiniao.idUsuario = usuario.id
-                        LIMIT 10";
+                        ORDER BY opiniao.id DESC LIMIT 10";
 
             $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
-            if($sql_query->num_rows==0){ 
-            // Se a query não encontrar nenhuma reclamação, mostrará essa mensagem ?>
-                <div>
-                    <div class="feedUltimasReclamacoes">
-                        <h3> Você ainda não opinou :( </h3>
+            while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
+    
+                <div id="principal">
+                
+                    <div class="feed">
+                
+                        <table id="post">
+                            <tr>
+                                <td colspan="3" class="nomeUser">
+                                <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
+                                </td>
+                            </tr>
+                
+                            <tr>
+                                <td class="nomeProduto">
+                                     <p> <?php echo $dados['nomeProduto']; ?>  (  <?php echo $dados['empresaFabricante']; ?> ) <p>
+                                </td>
+                            </tr>
+                
+                            <tr>
+                                <td class="textoPropaganda">
+                                    <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
+                                </td>
+                            <tr>
+                
+                            <tr> 
+                                <td class="textoOpiniao">
+                                    <p> <?php echo $dados['textoOpiniao']; ?> </p>
+                                </td>
+                            </tr>
+                
+                            <tr>
+                                <td class="caracteristicas">
+                                    <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                </td>
+                
+                                <td class="caracteristicas">
+                                    <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                </td>
+
+                                <td class="caracteristicas">
+                                        <p> <?php echo $dados['categoria']; ?> </p>
+                                    </td>
+
+                                <td class="caracteristicas">
+                                    <p> <?php echo $dados['data']; ?> </p>
+                                </td>
+                            </tr>
+                
+                        </table>      
                     </div>
                 </div>
 
-<?php       }else{
-
-                // Enquanto a query encontrar resultados, os mostrará em uma tabela 
-        
-                while ($dados = mysqli_fetch_assoc($sql_query)) { 
-
-                    $opiniaoid = $dados['id']; ?>
-
-                        <div id="principal">
-                            
-                            <div class="feed">
-                            
-                                <table id="post">
-                                    
-                                    <tr class="primeira-linha">
-                                        <td class = "nome-user" colspan="3">
-                                            <div> <img class = "venus" src="imagens/V.png" alt="Venus" width="30px"> </div>
-
-                                            <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
-                                        </td>
-                                    </tr>
-                        
-                                    <tr>
-                                        <td class="nomeProduto">
-                                                <p> <?php echo $dados['nomeProduto']; ?>  (  <?php echo $dados['empresaFabricante']; ?> ) <p>
-                                        </td>
-                                    </tr>
-                        
-                                    <tr>
-                                        <td class="textoPropaganda">
-                                            <h1> <i>"<?php echo $dados['textoPropaganda']; ?>" </i> </h1> 
-                                        </td>
-                                    <tr>
-                        
-                                    <tr> 
-                                        <td class="textoOpiniao">
-                                            <p> <?php echo $dados['textoOpiniao']; ?> </p>
-                                        </td>
-                                    </tr>
-                        
-                                    <tr>
-                                        <td class="caracteristicas">
-                                            <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
-                                        </td>
-                        
-                                        <td class="caracteristicas">
-                                            <p> Pele - <?php echo $dados['pele']; ?> </p>
-                                        </td>
-
-                                        <td class="caracteristicas">
-                                            <p> <?php echo $dados['data']; ?> </p>
-                                        </td>
-                                    </tr>
-                        
-                                </table>      
-                            </div>
-                        </div>
-
-<?php }}} ?>
+                
+        <?php }}?>
 
 </main>
 
+
     <footer>
-		<img class="logo2" src="imagens/V.png">
+		<img class="logo2" src="imagens/V.png" width="400px">
 	</footer>
 
 </body>

@@ -23,7 +23,7 @@ a:link, a:visited{
 }
 
 a:hover{
-    color:#782aac;
+    color:black;
     background-position: right bottom;
  
 }
@@ -58,14 +58,28 @@ nav{
   font-size: 15px;
 }
 
+.venus-item{
+    background-color: #782aac;
+    border-radius: 40px;
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Dropdown Button */
 .dropbtn {
-    background-color: black;
+    background-color: #782aac;
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 40px;
+    width: 100px;
+    height: 24px;
 }
   
   .dropdown {
@@ -76,7 +90,7 @@ nav{
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #782aac;
+    background-color: #171717;
     z-index: 1;
     border-radius: 10px;
 }
@@ -90,23 +104,12 @@ nav{
 
   .show {display:block;}
 
-/*MAIN*/
-
-main{
-    margin-top: 150px;
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-/* LADO DOS BOTÕES ------------------------------------------------------------------------------*/
-
-
-.barraPesquisa{
+  
+  /* PESQUISA ------------------------------------------------------------------------------*/
+  
+  .barraPesquisa{
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: #4f4f4f;
     width: 305px;
     height: 25px;
@@ -115,19 +118,31 @@ main{
 
 #pesquise{
     border: none;
-    background: none;
+    background: #4f4f4f;
     outline: none;
     font-size: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: center;
+    text-align: left;
 }
 
 .lupa{
+    display: flex;
     width: 18px;
     margin-left: 0px;
+    text-align: right;
+    margin-left: 20px;
 }
 
-/*LADO DO FEED --------------------------------------------------------------------------------------*/
+
+
+main{
+    margin-top: 80px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 
 #principal{
     flex-direction: column;
@@ -145,12 +160,19 @@ h1{
     font-size: x-large;
 }
 
+h2{
+    font-weight: 2500;
+    font-size: xx-large;
+    color: #eb6d59;
+    margin-bottom:30px;
+}
+
 h3{
     color: #4f4f4f;
     text-align: right;
 }
 
-/*POSTS*/   
+/*POSTS*/
 
 #post{ 
     border-radius: 10px;
@@ -159,7 +181,6 @@ h3{
     border-spacing: 0px;
     margin-bottom: 2em;
     background-color: #090909;
-    flex-direction: column;
 }
 
 th{
@@ -171,14 +192,17 @@ tr{
     display: flex;
     gap: 20px;
     margin: 20px;
-    overflow-wrap: break-word;
 }
 
-.nomeUser{
-    position: left;
+.primeira-linha{
     gap: 10px;
-    padding-left: 0px;
-    margin-left: 0px;
+    justify-content: left;
+    column-span: 3;
+    margin-left: 30px;
+}
+
+.nome-user{
+    word-wrap: break-word;
 }
 
 .nomeProduto{
@@ -200,6 +224,7 @@ tr{
 .caracteristicas{
     color: #4f4f4f;
     margin-left: 10px;
+    text-align: center;
 }
 
 td{
@@ -212,11 +237,10 @@ td{
 }
 
 
-
 /*BUTTOMS*/
 
 .cadastreReclamacao{
-    background-color: #4f4f4f;
+    background-color: #d01c7c;
     color: #ffffff;
     width: 150px;
     height: 25px;
@@ -228,7 +252,19 @@ td{
 }
 
 .categoriasButton{
-    background-color: #782aac;
+    background-color: #4f4f4f;
+    color: #ffffff;
+    width: 100px;
+    height: 25px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+.categoriasButtonEnfase{
+    background-color: #d01c7c;
     color: #ffffff;
     width: 100px;
     height: 25px;

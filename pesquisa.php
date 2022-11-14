@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/categorias.css">
+    <link rel="stylesheet" type="text/css" href="css/venus.css">
     <script type="text/javascript" src="js/main.js"></script>
     <title> Resultados da Pesquisa - Venus </title>  
 </head>
@@ -41,8 +41,32 @@
     <?php } ?>
     
     <nav>
+        <form class="barraPesquisa" action="pesquisa.php">
+            <input type="text" id="pesquise" placeholder="Produto? Empresa?" name="pesquise">
+            <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
+        </form>   
 
-        <a class="menu-item" href="venus.php" target="_self"> Venus </a>
+        <form action="reclamacao.php"> 
+            <button class="cadastreReclamacao" type="submit"> Opine! </button>
+        </form>
+
+        <form action="skincare.php"> 
+            <button class="categoriasButton" type="submit"> Skincare </button>
+        </form>
+
+        <form action="make.php"> 
+            <button class="categoriasButton" type="submit"> Makes </button>
+        </form>
+
+        <form action="cabelo.php"> 
+            <button class="categoriasButton" type="submit"> Cabelo </button>
+        </form>
+        
+        <form action="corpo.php"> 
+            <button class="categoriasButton" type="submit"> Corpo </button>
+        </form>
+
+        <a class="venus-item" href="venus.php" target="_self"> Venus </a>
 
         <!-- Definindo as opções do menu de navegação que o usuário logado terá -->
 
@@ -75,25 +99,6 @@
 
 <main>
 
-    <div id="esquerda">
-
-        <div class="botoes">
-
-            <form class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto / Empresa" name="pesquise">
-                <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-            </form>
-
-            <section class="cadastre">
-                <form action="reclamacao.php"> 
-                    <button class="cadastreReclamacao" type="submit"> Cadastre sua Opinião </button>
-                </form>
-            </section>
-
-        </div>
-    </div>
-
-
 <?php 
         
     if(isset ($_GET ['pesquise'])){
@@ -111,25 +116,25 @@
 
         // Se a pesquisa não retornar nenhum valor, o sistema mostrará a mensagem ?>
         
-            <div id="direita">
-                <div class="feedUltimasReclamacoes">
+            <div id="principal">
+                <div class="feed">
                     <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <strong class = "enfase"> Cadastre sua Opinião!</h3>
                 </div>
             </div>
         
-<?php   }else{ 
+<?php   }else{ ?>
 
-        //Enquanto a pesquisa encontrar dados, os mostrará em uma tabela
+            <h3> Resultado para a pesquisa "<?php echo "$pesquise" ?>"</h3>
+
+            //Enquanto a pesquisa encontrar dados, os mostrará em uma tabela
                         
-            while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
+            <?php while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
         
-                <div id="direita">
+                <div id="principal">
                             
-                    <div class="feedUltimasReclamacoes">
+                    <div class="feed">
                             
-                        <h3> Resultado para a pesquisa "<?php echo "$pesquise" ?>"</h3>
-                            
-                            <table id="postOpinioes">
+                            <table id="post">
 
                                 <tr class="primeira-linha">
                                         <td class = "nome-user" colspan="3">
