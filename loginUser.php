@@ -1,37 +1,6 @@
-<?php
-
-    if (isset($_POST['email'])){
-
-        //Se houver o post email, o sistema criar uma query para postar as informações no banco de dados
-
-        include ('conexao.php');
-
-        $email = $_POST ['email'];
-
-        //Senha criptografada pelo hash do php
-        
-        $senha = password_hash($_POST ['senha'], PASSWORD_DEFAULT);
-        $nome = $_POST ['nome'];
-        $sobrenome = $_POST ['sobrenome'];
-        $genero = $_POST ['genero'];
-        $pele = $_POST ['pele'];
-        $cabelo = $_POST ['cabelo'];
-
-        $deuCerto = $mysqli->query("INSERT INTO usuario (email, senha, nome, sobrenome, pele, cabelo, genero) 
-                                    VALUES ('$email', '$senha','$nome','$sobrenome', '$pele', '$cabelo', '$genero')");
-
-        if ($deuCerto){
-			header("Location: mensagem.php");
-			unset($_POST);
-			die();
-		}else{
-            echo "erro";        
-        }}  
-?>
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -78,20 +47,18 @@
 
     <h1 id="titulo">Cadastre-se!</h1>
 
-        <div id="principal">
-
             <form method="post" action="">
 
                 <fieldset>
 
                     <div class="campo">
                         <label for="email"> Email </label>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" id="campoReclamacao" required>
                     </div>
                 
                     <div class="campo">
                         <label for="senha">Senha </label>
-                        <input type="password" name="senha" required>
+                        <input type="password" name="senha" id="campoReclamacao" required>
                     </div>
 
                     <label id="tituloLabel"> Dados Pessoais</label>
@@ -99,21 +66,19 @@
                         <div class="campo">
 
                             <label for="nome"> Nome </label>
-                            <input type="text" name="nome" required>
+                            <input type="text" name="nome" id="campoReclamacao" required>
                         
                             <label for="sobrenome">Sobrenome </label>
-                            <input type="text" name="sobrenome" required>
+                            <input type="text" name="sobrenome" id="campoReclamacao" required>
 
                             <label for="genero"> Gênero </label>
 
-                            <select name="genero" required>
+                            <select id="campoReclamacao" name="genero" required>
                                 <option selected disabled value=""> Selecione </option>
                                 <option> Feminino </option>
                                 <option> Masculino</option>
                                 <option> Prefiro não informar </option>	
                             </select>	
-
-                        </div>
 
                 </fieldset>
 
@@ -125,7 +90,7 @@
 
                             <label for="pele"> Tipo de Pele </label>
 
-                                <select name="pele">
+                                <select id="campoReclamacao" name="pele">
                                     <option selected disabled value=""> Selecione </option>
                                     <option>Seca</option>
                                     <option>Mista-Seca</option>
@@ -136,7 +101,7 @@
                         
                             <label for="cabelo"> Tipos de Cabelo </label>
                             
-                                <select name="cabelo" required>
+                                <select id="campoReclamacao" name="cabelo" required>
                                     <option selected disabled value=""> Selecione </option>
                                     <option>Liso</option>
                                     <option>Ondulado</option>
@@ -150,8 +115,50 @@
                         </div>
                 </fieldset>
 
+
             </form>
-        </div>
+
+                <?php 
+
+                    if (isset($_POST['email'])){
+
+                        //Se houver o post email, o sistema criar uma query para postar as informações no banco de dados
+
+                        include ('conexao.php');
+
+                        $email = $mysqli->escape_string ($_POST ['email']);
+
+                        //Senha criptografada pelo hash do php
+                        
+                        $senha = password_hash($_POST ['senha'], PASSWORD_DEFAULT);
+                        $nome = $mysqli->escape_string ($_POST ['nome']);
+                        $sobrenome = $mysqli->escape_string ($_POST ['sobrenome']);
+                        $genero = $mysqli->escape_string ($_POST ['genero']);
+                        $pele = $mysqli->escape_string ($_POST ['pele']);
+                        $cabelo = $mysqli->escape_string ($_POST ['cabelo']);
+
+                        $sql_code = "SELECT * FROM usuario WHERE email = '$email'";
+
+	                    $sql_query = $mysqli->query($sql_code) or die ($mysqli->error);
+                
+                        if($sql_query->num_rows > 0){ ?>
+
+                            <div id="prncipal">
+                                <p class="erro"> Usuário já cadastrado :( Utilize outro e-mail </p>
+                            </div>
+
+                <?php   }else{
+
+                            $deuCerto = $mysqli->query("INSERT INTO usuario (email, senha, nome, sobrenome, pele, cabelo, genero) 
+                                                        VALUES ('$email', '$senha','$nome','$sobrenome', '$pele', '$cabelo', '$genero')");
+
+                            if ($deuCerto){
+                                header("Location: mensagem.php");
+                                unset($_POST);
+                                die();
+                            }        
+                    }} ?>
+            </div>
 
 </main>
     

@@ -36,6 +36,9 @@
 			header('Location: http://localhost/venustcc/mensagem.php');
 			unset($_POST);
 			die();
+		}else{
+			header('Location: mensagemErro.php');
+			die();
 		}
 	}
 		

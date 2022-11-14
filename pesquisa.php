@@ -108,7 +108,13 @@
         
         $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
 
-        $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante FROM opiniao JOIN usuario ON opiniao.idUsuario = usuario.id WHERE opiniao.empresaFabricante LIKE '%$pesquise%' OR opiniao.nomeProduto LIKE '%$pesquise%'";
+        $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante 
+                    FROM opiniao JOIN usuario 
+                    ON opiniao.idUsuario = usuario.id 
+                    WHERE opiniao.empresaFabricante 
+                    LIKE '%$pesquise%' 
+                    OR opiniao.nomeProduto 
+                    LIKE '%$pesquise%'";
 
         $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 

@@ -114,6 +114,7 @@ nav{
     width: 305px;
     height: 25px;
     border-radius: 40px;
+    gap: 35px;
 }
 
 #pesquise{
