@@ -108,7 +108,7 @@ if(!isset($_SESSION['usuario'])){
         
             if(isset ($_SESSION ['usuario'])){
 
-            // Se o usuário não pesquisar, o sistema mostrará todas as reclamações
+            // O sistema mostra as últimas opiniões
 
             $sql_code ="SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
                         FROM usuario JOIN opiniao

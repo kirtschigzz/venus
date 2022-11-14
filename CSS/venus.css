@@ -110,7 +110,7 @@ nav{
   .barraPesquisa{
     display: flex;
     justify-content: center;
-    background-color: #4f4f4f;
+    background-color: #ffffff;
     width: 305px;
     height: 25px;
     border-radius: 40px;
@@ -118,7 +118,7 @@ nav{
 
 #pesquise{
     border: none;
-    background: #4f4f4f;
+    background: #ffffff;
     outline: none;
     font-size: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -240,7 +240,7 @@ td{
 /*BUTTOMS*/
 
 .cadastreReclamacao{
-    background-color: #d01c7c;
+    background-color: #eb6d59;
     color: #ffffff;
     width: 150px;
     height: 25px;
@@ -264,7 +264,7 @@ td{
 }
 
 .categoriasButtonEnfase{
-    background-color: #d01c7c;
+    background-color: #eb6d59;
     color: #ffffff;
     width: 100px;
     height: 25px;
@@ -284,7 +284,7 @@ button:hover {
 /*PLACEHOLDER*/
 
 input::placeholder {
-    color: rgba(255, 255, 255, 0.421);
+    color: black;
   }
 
   
