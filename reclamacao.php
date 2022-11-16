@@ -1,6 +1,7 @@
 <?php 
 
 	include('conexao.php');
+	include('processar.php');
 	
 	
 	if(!isset($_SESSION)){
@@ -13,33 +14,6 @@
         die();
 	}else{
 		$usuario = $_SESSION['usuario'];
-	}
-
-
-    //Verificar se a variavel $_POST['nomeProduto'] existe
-	
-	if(isset($_POST['nomeProduto'])){
-
-		$nomeProduto = $_POST['nomeProduto'];
-		$empresaFabricante = $_POST['empresaFabricante'];
-		$categoria = $_POST['categoria'];
-		$textoPropaganda = $_POST['textoPropaganda'];
-		$textoOpiniao = $_POST['textoOpiniao'];
-		
-		$sql_code = "INSERT INTO opiniao 
-							(nomeProduto, empresaFabricante, categoria, textoPropaganda, textoOpiniao, data, idUsuario) VALUES 
-							('$nomeProduto', '$empresaFabricante', '$categoria', '$textoPropaganda', '$textoOpiniao', NOW(), '$usuario')"; 
-
-		$deuCerto = $mysqli->query($sql_code) or die($mysqli->error);
-
-		if ($deuCerto){
-			header('Location: http://localhost/venustcc/mensagem.php');
-			unset($_POST);
-			die();
-		}else{
-			header('Location: mensagemErro.php');
-			die();
-		}
 	}
 		
 ?>
@@ -104,7 +78,7 @@
 	</div>
 
     
-	<form method="post" action="">
+	<form method="post" action="processar.php">
 		
 		<fieldset class="fieldsets">
 
@@ -153,12 +127,3 @@
 
 </body>
 </html>
-
-<!-- if ($deuCerto){
-			header('Location: http://localhost/venustcc/venus.php');
-			unset($_POST);
-			die();
-		}else{
-			echo "<p> ERRO <p>";
-		}
-		-- 

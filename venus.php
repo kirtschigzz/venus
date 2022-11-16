@@ -101,7 +101,7 @@ if(!isset($_SESSION['usuario'])){
 
         <main>
 
-            <h2> últimas Interações </h2>
+            <h2> Últimas Interações </h2>
 
 
         <?php 

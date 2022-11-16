@@ -1,6 +1,7 @@
 a{
     text-decoration: none;
-  
+    font-size: 20px;
+    font-weight: bold;
 }
 
 a:link, a:visited{
@@ -14,26 +15,35 @@ a:hover{
  
 }
 
-form{
-    background-color: #090909;
-}
-
 button:hover {
     color: #eb6d59;
 }
 
 body{
     background-color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 500px;
+    background-color: #090909;
+    border-radius: 40px;
+    margin-top: 250px;
 }
 
-#principal{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    border-radius: 40px;
+.opcoes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
 }
 
 
@@ -42,10 +52,12 @@ h1{
 }
 
 #botao-sim{
-    background-color: #be12b5;
-    color: #ffffff;
+    background-color: #090909;
+    border: none;
+    color: #782aac;
     border-radius: 40px;
     font-size: 20px;
+    font-weight: bold;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     cursor: pointer;

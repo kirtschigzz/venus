@@ -40,8 +40,6 @@ if(!isset($_SESSION['usuario'])){
     
         <nav>
             <!-- Definindo as opções que os usuários terão no menu de nav -->
-            
-            <a class="menu-item" href="index.php" target="_self"> Home </a>
             <a class="menu-item" href="venus.php" target="_self"> Venus </a>
 
     <?php   if (!isset($_SESSION['usuario'])){ 
@@ -83,7 +81,8 @@ if(!isset($_SESSION['usuario'])){
             $sql_code = "SELECT opiniao.id, usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
                         FROM usuario JOIN opiniao
                         ON opiniao.idUsuario = usuario.id
-                        WHERE usuario.id = '". $_SESSION['usuario']."'";
+                        WHERE usuario.id = '". $_SESSION['usuario']."'
+                        ORDER BY opiniao.id DESC";
 
             $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
             
@@ -99,9 +98,7 @@ if(!isset($_SESSION['usuario'])){
             
             // Enquanto a query encontrar resultados, os mostrará em uma tabela 
                     
-                while ($dados = mysqli_fetch_assoc($sql_query)) { 
-
-                    $opiniaoid = $dados['id']; ?>
+                while ($dados = mysqli_fetch_assoc($sql_query)) { ?>
 
                         <div id="feed">
                             
@@ -116,9 +113,7 @@ if(!isset($_SESSION['usuario'])){
                                             <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
                                         
                                             <div class="botao-excluir">
-                                                <form action="excluir.php" method="post">
-                                                    <button class="excluir" name="excluir" type="submit"> <img src="imagens/lixo.png" width="25px"> </button>
-                                                </form>
+                                                <a class="excluir" href='excluir.php?opiniao.id=$dados[opiniao.id]' title="excluir"> <img src="imagens/lixo.png" width="25px"> </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -162,22 +157,6 @@ if(!isset($_SESSION['usuario'])){
                                 </table>      
                             </div>
                         </div>
-                
-                        <?php if(isset($_POST['excluir'])){
-    
-                            $sql_code = "DELETE FROM opiniao
-                                        WHERE opiniao.id = '$opiniaoid'";
-
-                            $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
-
-                            if($sql_query){ ?>
-
-                                <div id="feed">
-                                    <h1>Opinião Deletada com Sucesso!</h1>
-                                    <h1> <a href="perfil.php">Voltar para seu Perfil </a> </h1>
-                                </div>
-
-                        <?php die(); }};?>
                         
 <?php 
         

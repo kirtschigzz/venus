@@ -197,7 +197,8 @@ td{
     display: flex;
     text-align: right;
     justify-content: right;
-    padding-left: 150px;
+    width: 100px;
+    padding-left: 300px;
 }
 
 
