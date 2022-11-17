@@ -113,7 +113,7 @@ if(!isset($_SESSION['usuario'])){
                                             <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
                                         
                                             <div class="botao-excluir">
-                                                <a class="excluir" href='excluir.php?opiniao.id=$dados[opiniao.id]' title="excluir"> <img src="imagens/lixo.png" width="25px"> </a>
+                                                <a href="excluir.php?id=<?php echo $dados['id']; ?>"> <img src="imagens/lixo.png" width="25px"> </a>
                                             </div>
                                         </td>
                                     </tr>

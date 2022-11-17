@@ -14,8 +14,6 @@ if (isset($_POST ['email']) && ($_POST ['senha'])){
 	$sql_code = "SELECT * FROM usuario WHERE email = '$email'";
 	$sql_query = $mysqli->query($sql_code) or die ($mysqli->error);
 
-	$erro = false;
-
 	if($sql_query->num_rows == 0){
 
 		echo "<p> O email informado é incorreto </p>";

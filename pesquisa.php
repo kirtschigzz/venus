@@ -112,9 +112,9 @@
                     FROM opiniao JOIN usuario 
                     ON opiniao.idUsuario = usuario.id 
                     WHERE opiniao.empresaFabricante 
-                    LIKE '%$pesquise%' 
+                    LIKE _utf8 '%$pesquise%'collate utf8_general_ci
                     OR opiniao.nomeProduto 
-                    LIKE '%$pesquise%'";
+                    LIKE _utf8 '%$pesquise%' collate utf8_general_ci ";
 
         $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
