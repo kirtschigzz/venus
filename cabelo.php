@@ -43,7 +43,7 @@ if(!isset($_SESSION['usuario'])){
         <nav>
 
             <form class="barraPesquisa">
-                <input type="text" id="pesquise" placeholder="Produto? Empresa?" name="pesquise">
+                <input type="text" id="pesquise" placeholder="Para o Cabelo? Empresa?" name="pesquise">
                 <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
             </form>   
 
@@ -118,7 +118,8 @@ if(!isset($_SESSION['usuario'])){
                             AND nomeProduto 
                             LIKE '%$pesquise%' 
                             OR empresaFabricante 
-                            LIKE '%$pesquise%'";
+                            LIKE '%$pesquise%'
+                            ORDER BY opiniao.id DESC";
 
                 $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
@@ -203,7 +204,8 @@ if(!isset($_SESSION['usuario'])){
             $sql_code ="SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
                         FROM usuario JOIN opiniao
                         ON opiniao.idUsuario = usuario.id
-                        WHERE opiniao.categoria = 'Para o cabelo'";
+                        WHERE opiniao.categoria = 'Para o cabelo'
+                        ORDER BY opiniao.id DESC";
 
             $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 

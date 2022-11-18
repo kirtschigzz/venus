@@ -108,13 +108,14 @@
         
         $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
 
-        $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante 
+        $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
                     FROM opiniao JOIN usuario 
                     ON opiniao.idUsuario = usuario.id 
                     WHERE opiniao.empresaFabricante 
                     LIKE _utf8 '%$pesquise%'collate utf8_general_ci
                     OR opiniao.nomeProduto 
-                    LIKE _utf8 '%$pesquise%' collate utf8_general_ci ";
+                    LIKE _utf8 '%$pesquise%' collate utf8_general_ci 
+                    ORDER BY opiniao.id DESC";
 
         $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
 
@@ -176,6 +177,10 @@
                                     <td class="caracteristicas">
                                         <p> Pele - <?php echo $dados['pele']; ?> </p>
                                     </td>
+
+                                    <td class="caracteristicas">
+                                            <p> <?php echo $dados['categoria']; ?> </p>
+                                        </td>
 
                                     <td class="caracteristicas">
                                         <p> <?php echo $dados['data']; ?> </p>

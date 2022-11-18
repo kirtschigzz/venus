@@ -28,11 +28,6 @@ a:hover{
   background-position: right bottom;
  
 }
-
-p{
-  color: #ffffff;
-}
-
 /*HEADER*/
 
 header{
@@ -208,6 +203,7 @@ input{
   text-align: center;
   width: 500px;
   border-radius: 30px;
+  padding-bottom: 10px;
 }
 
 label{

@@ -285,7 +285,7 @@ button:hover {
 /*PLACEHOLDER*/
 
 input::placeholder {
-    color: black;
+    color: rgb(144, 141, 141);
   }
 
   

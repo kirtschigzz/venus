@@ -153,7 +153,7 @@
                                                         VALUES ('$email', '$senha','$nome','$sobrenome', '$pele', '$cabelo', '$genero')");
 
                             if ($deuCerto){
-                                header("Location: mensagem.php");
+                                header("Location: mensagemsucessoCadastro.php");
                                 unset($_POST);
                                 die();
                             }        

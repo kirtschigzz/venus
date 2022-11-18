@@ -70,7 +70,16 @@ if(!isset($_SESSION['usuario'])){
 
 <main>
 
-    <div id="feed"><h1 class="titulo"> Olá :) Aqui estão suas Opiniões </h1></div>
+<?php    
+        $usuario = $mysqli->real_escape_string($_SESSION['usuario']);
+
+        $nome = "SELECT nome FROM usuario JOIN opiniao ON opiniao.idUsuario = usuario.id WHERE usuario.id = '". $_SESSION['usuario']."'";
+
+        $query_nome = $mysqli->query($nome) or die($mysqli->error);
+            
+        $nomeuser = mysqli_fetch_assoc($query_nome);?>
+
+    <div id="feed"><h1 class="titulo"> Olá, <?php echo $nomeuser['nome']; ?> :) Aqui estão suas Opiniões </h1></div>
 
 <?php   if (isset($_SESSION['usuario'])){
 
