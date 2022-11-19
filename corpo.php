@@ -47,25 +47,15 @@ if(!isset($_SESSION['usuario'])){
                 <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
             </form>   
 
-            <form action="reclamacao.php"> 
-                <button class="cadastreReclamacao" type="submit"> Opine! </button>
-            </form>
+            <a class="venus-item" href="reclamacao.php"> Opine! </a>
+        
+            <a class="categorias-item" href="skincare.php"> Skincare </a>
 
-            <form action="skincare.php"> 
-                <button class="categoriasButton" type="submit"> Skincare </button>
-            </form>
+            <a class="categorias-item" href="make.php"> Makes </a>
 
-            <form action="make.php"> 
-                <button class="categoriasButton" type="submit"> Makes </button>
-            </form>
-
-            <form action="cabelo.php"> 
-                <button class="categoriasButton" type="submit"> Cabelo </button>
-            </form>
+            <a class="categorias-item" href="cabelo.php"> Cabelo </a>
             
-            <form action="corpo.php"> 
-                <button class="categoriasButtonEnfase" type="submit"> Corpo </button>
-            </form>
+            <a class="categorias-item" href="corpo.php"> Corpo </a>
 
             <!-- Definindo as opções do menu de navegação que o usuário logado terá -->
 
@@ -176,18 +166,18 @@ if(!isset($_SESSION['usuario'])){
                         
                                     <tr>
                                         <td class="caracteristicas">
-                                            <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                            <p> Cabelo: <?php echo $dados['cabelo']; ?> </p>
                                         </td>
                         
                                         <td class="caracteristicas">
-                                            <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                            <p> Pele: <?php echo $dados['pele']; ?> </p>
                                         </td>
 
                                         <td class="caracteristicas">
                                             <p> <?php echo $dados['categoria']; ?> </p>
                                         </td>
                                         <td class="caracteristicas">
-                                            <p> <?php echo $dados['data']; ?> </p>
+                                            <p> <?php echo date ("d/m/Y", strtotime ($dados['data'])); ?> </p>
                                         </td>
                                     </tr>
                         
@@ -244,11 +234,11 @@ if(!isset($_SESSION['usuario'])){
                 
                             <tr>
                                 <td class="caracteristicas">
-                                    <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                    <p> Cabelo: <?php echo $dados['cabelo']; ?> </p>
                                 </td>
                 
                                 <td class="caracteristicas">
-                                    <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                    <p> Pele: <?php echo $dados['pele']; ?> </p>
                                 </td>
 
                                 <td class="caracteristicas">
@@ -256,7 +246,7 @@ if(!isset($_SESSION['usuario'])){
                                 </td>
                                 
                                 <td class="caracteristicas">
-                                    <p> <?php echo $dados['data']; ?> </p>
+                                    <p> <?php echo date ("d/m/Y", strtotime ($dados['data'])); ?> </p>
                                 </td>
                             </tr>
                 

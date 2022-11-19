@@ -73,7 +73,7 @@ if(!isset($_SESSION['usuario'])){
 <?php    
         $usuario = $mysqli->real_escape_string($_SESSION['usuario']);
 
-        $nome = "SELECT nome FROM usuario JOIN opiniao ON opiniao.idUsuario = usuario.id WHERE usuario.id = '". $_SESSION['usuario']."'";
+        $nome = "SELECT nome FROM usuario WHERE usuario.id = '". $_SESSION['usuario']."'";
 
         $query_nome = $mysqli->query($nome) or die($mysqli->error);
             
@@ -147,11 +147,11 @@ if(!isset($_SESSION['usuario'])){
                         
                                     <tr>
                                         <td class="caracteristicas">
-                                            <p> Cabelo - <?php echo $dados['cabelo']; ?> </p>
+                                            <p> Cabelo: <?php echo $dados['cabelo']; ?> </p>
                                         </td>
                         
                                         <td class="caracteristicas">
-                                            <p> Pele - <?php echo $dados['pele']; ?> </p>
+                                            <p> Pele: <?php echo $dados['pele']; ?> </p>
                                         </td>
 
                                         <td class="caracteristicas">
@@ -159,7 +159,7 @@ if(!isset($_SESSION['usuario'])){
                                         </td>
 
                                         <td class="caracteristicas">
-                                            <p> <?php echo $dados['data']; ?> </p>
+                                            <p> <?php echo date ("d/m/Y", strtotime ($dados['data'])); ?> </p>
                                         </td>
                                     </tr>
                         

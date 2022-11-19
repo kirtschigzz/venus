@@ -41,30 +41,21 @@
     <?php } ?>
     
     <nav>
+        
         <form class="barraPesquisa" action="pesquisa.php">
             <input type="text" id="pesquise" placeholder="Produto? Empresa?" name="pesquise">
             <button id="pesquise" type="submit"> <img class="lupa" src="imagens/lupa.svg" alt="lupa"> </button>
-        </form>   
+        </form>  
 
-        <form action="reclamacao.php"> 
-            <button class="cadastreReclamacao" type="submit"> Opine! </button>
-        </form>
-
-        <form action="skincare.php"> 
-            <button class="categoriasButton" type="submit"> Skincare </button>
-        </form>
-
-        <form action="make.php"> 
-            <button class="categoriasButton" type="submit"> Makes </button>
-        </form>
-
-        <form action="cabelo.php"> 
-            <button class="categoriasButton" type="submit"> Cabelo </button>
-        </form>
+        <a class="venus-item" href="reclamacao.php"> Opine! </a>
         
-        <form action="corpo.php"> 
-            <button class="categoriasButton" type="submit"> Corpo </button>
-        </form>
+        <a class="categorias-item" href="skincare.php"> Skincare </a>
+
+        <a class="categorias-item" href="make.php"> Makes </a>
+
+        <a class="categorias-item" href="cabelo.php"> Cabelo </a>
+        
+        <a class="categorias-item" href="corpo.php"> Corpo </a>
 
         <a class="venus-item" href="venus.php" target="_self"> Venus </a>
 
@@ -183,7 +174,7 @@
                                         </td>
 
                                     <td class="caracteristicas">
-                                        <p> <?php echo $dados['data']; ?> </p>
+                                        <p> <?php echo date ("d/m/Y", strtotime ($dados['data'])); ?> </p>
                                     </td>
                                 </tr>
                         

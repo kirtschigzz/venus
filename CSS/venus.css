@@ -23,6 +23,9 @@ a:link, a:visited{
 }
 
 a:hover{
+    transform: scale(1.1);
+    transition: all 0.5s;
+    color: #ffffff;
     color:black;
     background-position: right bottom;
  
@@ -61,6 +64,17 @@ nav{
 .venus-item{
     background-color: #782aac;
     border-radius: 40px;
+    width: 130px;
+    height: 25px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categorias-item{
+    background-color: #4f4f4f;
+    border-radius: 40px;
     width: 100px;
     height: 25px;
     font-size: 15px;
@@ -70,6 +84,13 @@ nav{
 }
 
 /* Dropdown Button */
+.dropbtn:hover {
+    transform: scale(1.1);
+    transition: all 0.5s;
+    color: #ffffff;
+}
+
+
 .dropbtn {
     background-color: #782aac;
     color: white;
@@ -78,7 +99,7 @@ nav{
     font-size: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 40px;
-    width: 100px;
+    width: 130px;
     height: 24px;
 }
   
@@ -274,12 +295,6 @@ td{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     cursor: pointer;
-}
-  
-button:hover {
-    transform: scale(1.1);
-    transition: all 0.5s;
-    color: #ffffff;
 }
 
 /*PLACEHOLDER*/
