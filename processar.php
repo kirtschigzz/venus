@@ -1,5 +1,7 @@
 <?php 
 
+// versão final
+
 include('conexao.php');
 
 if(!isset($_SESSION)){
