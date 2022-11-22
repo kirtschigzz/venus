@@ -1,5 +1,7 @@
 <?php
 
+// versão final
+
 $host = "localhost";
 $db = "venus";
 $user = "root";

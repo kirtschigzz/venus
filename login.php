@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<?php // versão final ?>
+
 <html lang="en">
 
 	<head>

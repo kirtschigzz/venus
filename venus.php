@@ -1,4 +1,5 @@
 <?php
+// versão final
 
 include('conexao.php');
 
@@ -11,6 +12,7 @@ if(!isset($_SESSION['usuario'])){
     header("Location: login.php");	
     die();
 }
+
 
 ?>
 
