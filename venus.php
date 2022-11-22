@@ -116,7 +116,7 @@ if(!isset($_SESSION['usuario'])){
                         <table id="post">
                             <tr>
                                 <td colspan="3" class="nomeUser">
-                                <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo ($dados['nome'] . $dados['sobrenome']) ; ?> </h1>
+                                <img src="imagens/V.png" alt="Venus" width="30px"> <h1> <?php echo $dados['nome']; ?> <?php echo $dados['sobrenome']; ?> </h1>
                                 </td>
                             </tr>
                 

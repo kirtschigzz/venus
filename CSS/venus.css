@@ -26,7 +26,7 @@ a:hover{
     transform: scale(1.1);
     transition: all 0.5s;
     color: #ffffff;
-    color:black;
+    color:#4f4f4f;
     background-position: right bottom;
  
 }

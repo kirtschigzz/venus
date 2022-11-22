@@ -107,10 +107,7 @@ if(!isset($_SESSION['usuario'])){
                     FROM usuario JOIN opiniao
                     ON opiniao.idUsuario = usuario.id
                     WHERE opiniao.categoria = 'Skincare'
-                    AND nomeProduto 
-                    LIKE '%$pesquise%' 
-                    OR empresaFabricante 
-                    LIKE '%$pesquise%'
+                    AND MATCH (opiniao.nomeProduto, opiniao.empresaFabricante) AGAINST ('$pesquise')
                     ORDER BY opiniao.id DESC";
 
         $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
@@ -121,7 +118,7 @@ if(!isset($_SESSION['usuario'])){
     
             <div id="direita">
                 <div class="feedUltimasReclamacoes">
-                    <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <strong class = "enfase"> Cadastre sua Opinião!</h3>
+                    <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <a class="enfase" href="reclamacao.php"> Cadastre sua Opinião! </a> </h3>
                 </div>
             </div>
     

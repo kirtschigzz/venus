@@ -96,19 +96,17 @@
     
     // Se o usuário pesquisar, será criada uma query com a consulta no banco de dados
         
-        
         $pesquise = $mysqli->real_escape_string($_GET['pesquise']);
-
+    
+        
         $sql_code = "SELECT usuario.nome, usuario.sobrenome, usuario.pele, usuario.cabelo, opiniao.textoPropaganda, opiniao.textoOpiniao, opiniao.data, opiniao.nomeProduto, opiniao.empresaFabricante, opiniao.categoria
-                    FROM opiniao JOIN usuario 
-                    ON opiniao.idUsuario = usuario.id 
-                    WHERE opiniao.empresaFabricante 
-                    LIKE _utf8 '%$pesquise%'collate utf8_general_ci
-                    OR opiniao.nomeProduto 
-                    LIKE _utf8 '%$pesquise%' collate utf8_general_ci 
-                    ORDER BY opiniao.id DESC";
+        FROM opiniao JOIN usuario 
+        ON opiniao.idUsuario = usuario.id 
+        WHERE MATCH (opiniao.nomeProduto, opiniao.empresaFabricante) AGAINST ('$pesquise')
+        ORDER BY opiniao.id DESC";
 
         $sql_query = $mysqli->query($sql_code) or die ("ERRO AO CONSULTAR!" . $mysqli->error);
+
 
         if($sql_query->num_rows==0){ 
 
@@ -116,7 +114,7 @@
         
             <div id="principal">
                 <div class="feed">
-                    <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <strong class = "enfase"> Cadastre sua Opinião!</h3>
+                    <h3> Nenhum resultado para a pesquisa "<?php echo "$pesquise" ?>". <br> <a class="enfase" href="reclamacao.php"> Cadastre sua Opinião! </a> </h3>
                 </div>
             </div>
         
